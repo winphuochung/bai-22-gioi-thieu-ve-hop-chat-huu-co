@@ -5,13 +5,13 @@
 
 const STORAGE_KEYS = {
   STUDENT: 'khtn9_bai22_student',
-  GAS_URL: 'khtn9_bai22_gas_url',
+  GAS_URL: 'khtn9_bai22_gas_url_v2',
   PROGRESS: 'khtn9_bai22_progress',
   EXAM_DRAFT: 'khtn9_bai22_exam_draft'
 };
 
 // Mặc định URL Google Apps Script (Giáo viên có thể cập nhật trực tiếp tại đây hoặc qua nút ⚙️ Google Sheet)
-const DEFAULT_GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxWPgjCoHP3EMGuhPSGGz2hGazho0kurPczJq-du3khRafjnGHfc8HXVmTwUUkuY4EVAw/exec';
+const DEFAULT_GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyRlCLol3x1_DQd4EjsszSzwjYV6R4RjmKEZrmxm0Qmj43Gy1BTBsFJvXLj5_wHzp2RwQ/exec';
 
 const state = {
   studentName: '',
