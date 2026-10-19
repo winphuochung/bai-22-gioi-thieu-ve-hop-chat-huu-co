@@ -1766,16 +1766,25 @@ function initGasModal() {
   copyCodeBtn.addEventListener('click', async () => {
     const sampleGasCode = `const SHEET_NAME = 'KetQua_Bai22_KHTN9';
 function doPost(e) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(['Thời gian nộp','Họ và tên học sinh','Lớp','Tổng điểm (/100)','Danh hiệu','Điểm TN Nhiều lựa chọn (/20)','Điểm TN Đúng/Sai (/20)','Điểm TN Trả lời ngắn (/20)','Điểm TN Ghép cột (/20)','Điểm Tự luận (/20)','Thời gian làm (giây)','Bài làm Tự luận (4 câu)']);
+  const lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = ss.getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      sheet = ss.insertSheet(SHEET_NAME);
+      const headers = ['Thời gian nộp','Họ và tên học sinh','Lớp','Tổng điểm (/100)','Xếp loại / Danh hiệu','Điểm TN Nhiều lựa chọn (/20)','Điểm TN Đúng/Sai (/20)','Điểm TN Trả lời ngắn (/20)','Điểm TN Ghép cột (/20)','Điểm Tự luận (/20)','Thời gian làm bài (giây)','Bài làm Tự luận (4 câu)','Chi tiết đáp án (JSON)'];
+      sheet.appendRow(headers);
+      sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#831843').setFontColor('#FFFFFF');
+      sheet.setFrozenRows(1);
+    }
+    const data = JSON.parse(e.postData.contents);
+    const time = Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'dd/MM/yyyy HH:mm:ss');
+    sheet.appendRow([time, data.studentName || '', data.studentClass || '', Number(data.totalScore || 0), data.badgeTitle || '', Number(data.mcqScore || 0), Number(data.tfScore || 0), Number(data.shortScore || 0), Number(data.matchScore || 0), Number(data.essayScore || 0), Number(data.durationSeconds || 0), data.essaySummary || '', data.detailsJson || '']);
+    return ContentService.createTextOutput(JSON.stringify({status:'success'})).setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
   }
-  const data = JSON.parse(e.postData.contents);
-  const time = Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'dd/MM/yyyy HH:mm:ss');
-  sheet.appendRow([time, data.studentName, data.studentClass, data.totalScore, data.badgeTitle, data.mcqScore, data.tfScore, data.shortScore, data.matchScore, data.essayScore, data.durationSeconds, data.essaySummary]);
-  return ContentService.createTextOutput(JSON.stringify({status:'success'})).setMimeType(ContentService.MimeType.JSON);
 }`;
     try {
       await navigator.clipboard.writeText(sampleGasCode);

@@ -1,27 +1,33 @@
 /**
  * GOOGLE APPS SCRIPT - HỆ THỐNG LƯU ĐIỂM TỰ ĐỘNG KHTN 9
- * Bài 22: Giới thiệu về hợp chất hữu cơ
+ * Bài 22: Giới thiệu về hợp chất hữu cơ (Chương VII - Kết nối tri thức)
  * Giáo viên: Lê Văn Thắng - Trường TH & THCS Phước Hưng
  *
- * HƯỚNG DẪN CÀI ĐẶT:
- * 1. Mở Google Sheets mới (https://sheets.new)
- * 2. Chọn Tiện ích mở rộng (Extensions) -> Apps Script
- * 3. Xóa mã mặc định, dán toàn bộ mã này vào và nhấn Lưu (Ctrl+S)
- * 4. Nhấn Triển khai (Deploy) -> Tùy chọn triển khai mới (New deployment)
- * 5. Chọn loại: Ứng dụng web (Web app)
+ * HƯỚNG DẪN CÀI ĐẶT TRÊN GOOGLE SHEETS:
+ * 1. Mở một bảng tính Google Sheets mới (https://sheets.new)
+ * 2. Trên thanh menu, chọn: Tiện ích mở rộng (Extensions) -> Apps Script
+ * 3. Xóa đoạn mã mặc định trong tệp Code.gs, dán toàn bộ mã dưới đây vào và nhấn Lưu (Ctrl + S)
+ * 4. Nhấn nút "Triển khai" (Deploy) ở góc trên bên phải -> "Tùy chọn triển khai mới" (New deployment)
+ * 5. Nhấn biểu tượng bánh răng (Chọn loại) -> Chọn "Ứng dụng web" (Web app):
+ *    - Mô tả: Lưu điểm Bài 22 KHTN 9
  *    - Thực thi dưới dạng (Execute as): Tôi (Me)
  *    - Ai có quyền truy cập (Who has access): Bất kỳ ai (Anyone)
- * 6. Nhấn Triển khai (Deploy), cấp quyền và sao chép URL Ứng dụng Web (Web App URL)
- * 7. Dán URL đó vào phần "⚙️ Google Sheet" trên Website học tập.
+ * 6. Nhấn "Triển khai" (Deploy) -> Cấp quyền truy cập (Authorize access -> Advanced -> Go to project)
+ * 7. Sao chép đường dẫn "URL ứng dụng web" (Web App URL, có đuôi .../exec)
+ * 8. Mở trang web học tập -> Nhấn nút "⚙️ Google Sheet" trên thanh công cụ -> Dán URL vào và nhấn "Lưu URL kết nối"
  */
 
 const SHEET_NAME = 'KetQua_Bai22_KHTN9';
 
 function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.tryLock(10000); // Chống xung đột khi cả lớp nộp bài cùng lúc
+
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     let sheet = ss.getSheetByName(SHEET_NAME);
 
+    // Tự động tạo trang tính và định dạng tiêu đề nếu chưa có
     if (!sheet) {
       sheet = ss.insertSheet(SHEET_NAME);
       const headers = [
@@ -43,19 +49,25 @@ function doPost(e) {
       sheet.getRange(1, 1, 1, headers.length)
         .setFontWeight('bold')
         .setBackground('#831843')
-        .setFontColor('#FFFFFF');
+        .setFontColor('#FFFFFF')
+        .setHorizontalAlignment('center');
       sheet.setFrozenRows(1);
     }
 
+    // Đọc dữ liệu JSON gửi từ Website Bài 22
     let payload = {};
-    if (e.postData && e.postData.contents) {
+    if (e && e.postData && e.postData.contents) {
       payload = JSON.parse(e.postData.contents);
-    } else if (e.parameter) {
+    } else if (e && e.parameter) {
       payload = e.parameter;
     }
 
     const timestamp = new Date();
-    const formattedTime = Utilities.formatDate(timestamp, 'Asia/Ho_Chi_Minh', 'dd/MM/yyyy HH:mm:ss');
+    const formattedTime = Utilities.formatDate(
+      timestamp,
+      'Asia/Ho_Chi_Minh',
+      'dd/MM/yyyy HH:mm:ss'
+    );
 
     const rowData = [
       formattedTime,
@@ -90,6 +102,8 @@ function doPost(e) {
         message: error.toString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
   }
 }
 
