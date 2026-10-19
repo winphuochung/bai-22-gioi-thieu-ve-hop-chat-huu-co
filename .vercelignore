@@ -1,0 +1,14 @@
+.agents/
+.agent/
+agents/
+.shared/
+rules/
+skills/
+workflows/
+tasks/
+scripts/
+google-apps-script/
+ARCHITECTURE.md
+mcp_config.json
+Screenshot*.png
+*.log

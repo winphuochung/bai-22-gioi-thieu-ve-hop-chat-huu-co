@@ -1,6 +1,8 @@
 {
-  "version": 2,
-  "name": "bai-22-gioi-thieu-ve-hop-chat-huu-co",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false
 }
