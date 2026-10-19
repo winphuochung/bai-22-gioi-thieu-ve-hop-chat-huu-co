@@ -1,0 +1,24 @@
+# Agent & AI Assistant Directories
+.agents/
+.agents
+.agent/
+.agent
+agents/
+.shared/
+rules/
+skills/
+workflows/
+tasks/
+scripts/
+ARCHITECTURE.md
+mcp_config.json
+
+# Vercel & Build
+.vercel/
+node_modules/
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

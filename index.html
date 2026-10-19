@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài 22: Giới thiệu về hợp chất hữu cơ | KHTN 9 - Học liệu số tương tác</title>
+  <meta name="description" content="Website bài học tương tác môn Khoa học tự nhiên 9 - Bài 22: Giới thiệu về hợp chất hữu cơ (Khái niệm, Công thức phân tử, Công thức cấu tạo, Mạch carbon, Phân loại Hydrocarbon & Dẫn xuất, Thử thách 100 điểm kết nối Google Sheets)." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#sec-warmup" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Chuyển đến nội dung chính</a>
+
+  <!-- ========================================================================
+       CỔNG ĐĂNG NHẬP HỌC SINH (BẮT BUỘC TRƯỚC KHI VÀO GIAO DIỆN CHÍNH)
+       ======================================================================== -->
+  <main id="login-screen" class="login-overlay" aria-label="Giao diện đăng nhập của học sinh">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="logo.png" alt="Logo Giáo viên Hóa học Lê Văn Thắng - TH & THCS Phước Hưng" class="login-logo" />
+        <div>
+          <span class="login-school-tag">KHTN 9 • Chương VII • Kết nối tri thức</span>
+          <h1 class="login-title">BÀI 22: GIỚI THIỆU VỀ HỢP CHẤT HỮU CƠ</h1>
+          <p style="font-size: 0.9rem; color: #475569; font-weight: 700; margin-top: 4px;">
+            👨‍🏫 GV: Lê Văn Thắng – Trường TH &amp; THCS Phước Hưng
+          </p>
+        </div>
+      </div>
+
+      <div class="login-welcome-box">
+        <strong>🧪 Chào mừng nhà Hóa học trẻ lớp 9!</strong><br />
+        Từ ngọn lửa bếp gas, chai giấm gạo trong gian bếp cho đến những hạt phân đạm ngoài đồng ruộng... tất cả đều ẩn chứa bí mật của <strong>Hợp chất hữu cơ</strong>! Hãy đăng nhập Họ tên và Lớp để bắt đầu hành trình khám phá nhé! ✨
+      </div>
+
+      <div id="login-error-msg" class="login-error hidden" role="alert">
+        ⚠️ Vui lòng nhập đầy đủ <strong>Họ và tên học sinh</strong> và <strong>Lớp</strong> trước khi vào trang học tập!
+      </div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="student-name-input" class="form-label">
+            👨‍🎓 Họ và tên học sinh: <span style="color:#DC2626">*</span>
+          </label>
+          <input
+            type="text"
+            id="student-name-input"
+            class="form-input"
+            placeholder="Ví dụ: Nguyễn Hoàng Minh"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="student-class-input" class="form-label">
+            🏫 Lớp: <span style="color:#DC2626">*</span>
+          </label>
+          <input
+            type="text"
+            id="student-class-input"
+            class="form-input"
+            placeholder="Ví dụ: 9A1"
+            required
+          />
+          <div class="class-chips" aria-label="Chọn nhanh lớp học">
+            <button type="button" class="class-chip" data-class="9A1">Lớp 9A1</button>
+            <button type="button" class="class-chip" data-class="9A2">Lớp 9A2</button>
+            <button type="button" class="class-chip" data-class="9A3">Lớp 9A3</button>
+            <button type="button" class="class-chip" data-class="9A4">Lớp 9A4</button>
+            <button type="button" class="class-chip" data-class="9A5">Lớp 9A5</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-yellow btn-block">
+          🚀 ĐĂNG NHẬP &amp; VÀO BÀI HỌC TƯƠNG TÁC
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       GIAO DIỆN CHÍNH CỦA TRANG WEB (CHỈ HIỂN THỊ SAU KHI ĐĂNG NHẬP)
+       ======================================================================== -->
+  <div id="main-app" class="hidden">
+
+    <!-- 1. HEADER: TÊN BÀI HỌC, THANH TIẾN TRÌNH (0% - 100%), THÔNG TIN HS -->
+    <header class="site-header">
+      <div class="header-top">
+        <div class="brand-group">
+          <img src="logo.png" alt="Logo Giáo viên Hóa học Lê Văn Thắng" class="header-logo" />
+          <div>
+            <span class="lesson-badge">KHTN 9 • Bài 22</span>
+            <div class="header-title">GIỚI THIỆU VỀ HỢP CHẤT HỮU CƠ</div>
+          </div>
+        </div>
+
+        <div class="progress-wrapper" aria-label="Thanh tiến trình học tập">
+          <div class="progress-meta">
+            <span>📊 Tiến trình chinh phục bài học</span>
+            <span id="progress-percent-text">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="progress-bar-fill" class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="user-controls">
+          <div class="student-pill" title="Thông tin học sinh đang đăng nhập">
+            <span>👨‍🎓 <strong id="display-student-name">Học sinh</strong></span>
+            <span>|</span>
+            <span>Lớp: <strong id="display-student-class">9A</strong></span>
+          </div>
+          <div class="xp-pill" title="Điểm năng lượng tích lũy">
+            ⚡ <span id="xp-counter">0</span> XP
+          </div>
+          <button type="button" id="open-gas-modal-btn" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.85rem;">
+            ⚙️ Google Sheet
+          </button>
+          <button type="button" id="logout-btn" class="btn btn-danger" style="padding: 6px 12px; font-size: 0.85rem;">
+            🚪 Đăng xuất
+          </button>
+        </div>
+      </div>
+
+      <nav class="section-nav" aria-label="Điều hướng các phần của bài học">
+        <div class="section-nav-inner">
+          <button type="button" class="nav-tab active" data-sec="sec-warmup">1. Khởi động (Warm-up)</button>
+          <button type="button" class="nav-tab" data-sec="sec-knowledge">2. Khám phá kiến thức (I → IV)</button>
+          <button type="button" class="nav-tab" data-sec="sec-practice">3. Luyện tập tương tác</button>
+          <button type="button" class="nav-tab" data-sec="sec-challenge">4. Game Challenge (100 Điểm)</button>
+          <button type="button" class="nav-tab" data-sec="sec-summary">5. Tổng kết &amp; Tài liệu</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="main-container">
+
+      <!-- ====================================================================
+           SECTION 1: KHỞI ĐỘNG (WARM-UP) - GIẢI MÃ HÌNH 22.1 SGK
+           ==================================================================== -->
+      <section id="sec-warmup" class="lesson-section">
+        <div class="section-header">
+          <div>
+            <span class="section-step-tag">Section 1 • Khởi động (Warm-up)</span>
+            <h2 class="section-title">🧪 Thám tử Hóa học: Điểm chung bí ẩn trong Hình 22.1 là gì?</h2>
+            <p class="section-subtitle">
+              Hợp chất hữu cơ đóng vai trò thiết yếu cho sự sống phát triển và xuất hiện ở khắp mọi nơi quanh ta!
+            </p>
+          </div>
+        </div>
+
+        <h3 style="color: var(--primary-plum); margin-bottom: 12px; font-size: 1.12rem;">🎯 Mục tiêu bài học (SGK KHTN 9 - Trang 102):</h3>
+        <div class="goals-grid">
+          <div class="goal-card">
+            <strong>1. Khái niệm:</strong> Nêu được khái niệm hợp chất hữu cơ và chuyên ngành hóa học hữu cơ.
+          </div>
+          <div class="goal-card">
+            <strong>2. Công thức &amp; Cấu tạo:</strong> Nêu được khái niệm công thức phân tử, công thức cấu tạo, ý nghĩa của chúng và đặc điểm cấu tạo hợp chất hữu cơ.
+          </div>
+          <div class="goal-card">
+            <strong>3. Phân biệt Vô cơ / Hữu cơ:</strong> Phân biệt được chất vô cơ hay hữu cơ dựa theo công thức phân tử (kể cả các trường hợp ngoại lệ).
+          </div>
+          <div class="goal-card">
+            <strong>4. Phân loại sơ bộ:</strong> Trình bày được sự phân loại sơ bộ hợp chất hữu cơ gồm <em>Hydrocarbon</em> và <em>Dẫn xuất của hydrocarbon</em>.
+          </div>
+        </div>
+
+        <!-- Hình 22.1 Tương tác -->
+        <div style="background: #FDF2F8; border: 2px solid #F472B6; border-radius: 18px; padding: 22px; margin-bottom: 22px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span class="lesson-badge">Hình 22.1 SGK • Một số hợp chất hữu cơ phổ biến</span>
+              <h3 style="color: var(--primary-plum); margin-top: 6px;">
+                👆 Hãy click vào từng đồ vật quen thuộc bên dưới để soi công thức phân tử của chúng!
+              </h3>
+            </div>
+            <button type="button" id="reveal-all-fig22-btn" class="btn btn-outline" style="padding: 8px 14px; font-size: 0.88rem;">
+              🔍 Lật mở tất cả 4 chất
+            </button>
+          </div>
+
+          <div class="fig22-1-grid" id="fig22-1-cards">
+            <!-- Card 1: Butane -->
+            <div class="fig22-card" data-mol="butane" tabindex="0" role="button">
+              <div class="fig22-svg-box">
+                <svg viewBox="0 0 160 125" width="150" height="116" aria-label="Bếp gas sử dụng nhiên liệu Butane">
+                  <defs>
+                    <linearGradient id="stoveBase" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#334155" />
+                      <stop offset="100%" stop-color="#0F172A" />
+                    </linearGradient>
+                    <linearGradient id="flameOuter" x1="0" y1="1" x2="0" y2="0">
+                      <stop offset="0%" stop-color="#0284C7" />
+                      <stop offset="60%" stop-color="#38BDF8" />
+                      <stop offset="100%" stop-color="#BAE6FD" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Nền tròn dịu -->
+                  <circle cx="80" cy="62" r="52" fill="#F0F9FF" />
+                  <!-- Vòng lửa gas xanh bên ngoài -->
+                  <path d="M36 74 Q32 46 46 58 Q48 32 62 52 Q72 24 80 48 Q88 24 98 52 Q112 32 114 58 Q128 46 124 74 Z" fill="url(#flameOuter)" opacity="0.95" />
+                  <!-- Lõi lửa xanh sáng bên trong -->
+                  <path d="M46 74 Q45 55 55 63 Q60 44 70 58 Q80 36 80 54 Q80 36 90 58 Q100 44 105 63 Q115 55 114 74 Z" fill="#E0F2FE" />
+                  <!-- Đầu đốt đồng & kiềng bếp -->
+                  <ellipse cx="80" cy="76" rx="44" ry="9" fill="#475569" stroke="#1E293B" stroke-width="2" />
+                  <ellipse cx="80" cy="74" rx="28" ry="5.5" fill="#F59E0B" stroke="#B45309" stroke-width="1.5" />
+                  <!-- Kiềng bếp gas -->
+                  <path d="M26 70 L46 77 M134 70 L114 77 M80 68 L80 79" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                  <!-- Thân mặt bếp -->
+                  <rect x="22" y="82" width="116" height="22" rx="8" fill="url(#stoveBase)" stroke="#0F172A" stroke-width="2" />
+                  <circle cx="118" cy="93" r="5.5" fill="#94A3B8" stroke="#E2E8F0" stroke-width="1.5" />
+                  <rect x="34" y="87" width="56" height="12" rx="6" fill="#0EA5E9" opacity="0.22" />
+                  <text x="62" y="96" text-anchor="middle" font-size="8" font-weight="800" fill="#E0F2FE">GAS C4H10</text>
+                </svg>
+              </div>
+              <div style="font-weight: 800; color: var(--text-main);">🔥 Ngọn lửa bếp gas</div>
+              <div class="chem-formula-badge"><span class="carbon-highlight">C</span><sub>4</sub>H<sub>10</sub> (Butane)</div>
+              <p style="font-size: 0.86rem; color: var(--text-secondary);">Một loại khí hóa lỏng, dùng làm nhiên liệu đun nấu.</p>
+              <div class="fig22-secret" style="margin-top: 8px; font-size: 0.82rem; font-weight: 800; color: var(--primary-plum-bright);">
+                👆 Click để kiểm tra nguyên tố!
+              </div>
+            </div>
+
+            <!-- Card 2: Ethylic alcohol -->
+            <div class="fig22-card" data-mol="alcohol" tabindex="0" role="button">
+              <div class="fig22-svg-box">
+                <svg viewBox="0 0 160 125" width="150" height="116" aria-label="Chai và ly đồ uống có cồn chứa Ethylic alcohol">
+                  <defs>
+                    <linearGradient id="greenGlass" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#4D7C0F" />
+                      <stop offset="45%" stop-color="#65A30D" />
+                      <stop offset="100%" stop-color="#365314" />
+                    </linearGradient>
+                    <linearGradient id="amberDrink" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#FDE047" />
+                      <stop offset="100%" stop-color="#D97706" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Nền tròn dịu -->
+                  <circle cx="80" cy="62" r="52" fill="#FEFCE8" />
+                  <!-- Chai thủy tinh xanh -->
+                  <rect x="43" y="12" width="14" height="7" rx="2" fill="#D97706" />
+                  <rect x="44" y="19" width="12" height="16" fill="#4D7C0F" stroke="#365314" stroke-width="1.5" />
+                  <path d="M44 35 C34 45 32 52 32 62 L32 104 C32 107 34 109 38 109 L62 109 C66 109 68 107 68 104 L68 62 C68 52 66 45 56 35 Z" fill="url(#greenGlass)" stroke="#365314" stroke-width="2" />
+                  <!-- Vệt sáng bóng thủy tinh -->
+                  <path d="M37 54 L37 100" stroke="#ECFCCB" stroke-width="2.5" stroke-linecap="round" opacity="0.55" />
+                  <!-- Nhãn chai vừa vặn -->
+                  <rect x="36" y="62" width="28" height="30" rx="3.5" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.5" />
+                  <circle cx="50" cy="73" r="5.5" fill="#15803D" />
+                  <path d="M48 73 L50 75 L53 71" stroke="#FEF9C3" stroke-width="1.5" fill="none" stroke-linecap="round" />
+                  <text x="50" y="87" text-anchor="middle" font-size="6.8" font-weight="900" fill="#713F12">ALC.</text>
+                  <!-- Ly thủy tinh có bọt -->
+                  <path d="M84 40 L122 40 L116 98 C115 102 112 104 108 104 L98 104 C94 104 91 102 90 98 Z" fill="url(#amberDrink)" stroke="#94A3B8" stroke-width="2" />
+                  <!-- Lớp bọt trắng mịn -->
+                  <path d="M83 40 C83 34 90 33 94 36 C98 31 108 31 112 36 C116 33 123 34 123 40 L121 50 L85 50 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+                  <!-- Bọt khí sủi trong ly -->
+                  <circle cx="98" cy="82" r="2" fill="#FEF9C3" opacity="0.85" />
+                  <circle cx="106" cy="70" r="2.5" fill="#FEF9C3" opacity="0.85" />
+                  <circle cx="101" cy="60" r="1.8" fill="#FEF9C3" opacity="0.85" />
+                  <!-- Đế ly -->
+                  <rect x="92" y="104" width="22" height="5" rx="2.5" fill="#CBD5E1" stroke="#64748B" stroke-width="1.2" />
+                </svg>
+              </div>
+              <div style="font-weight: 800; color: var(--text-main);">🍺 Đồ uống có cồn / Cồn y tế</div>
+              <div class="chem-formula-badge"><span class="carbon-highlight">C</span><sub>2</sub>H<sub>5</sub>OH (Ethylic alcohol)</div>
+              <p style="font-size: 0.86rem; color: var(--text-secondary);">Có trong thành phần của đồ uống có cồn, cồn sát khuẩn.</p>
+              <div class="fig22-secret" style="margin-top: 8px; font-size: 0.82rem; font-weight: 800; color: var(--primary-plum-bright);">
+                👆 Click để kiểm tra nguyên tố!
+              </div>
+            </div>
+
+            <!-- Card 3: Acetic acid (Chai Giấm gạo lên men được thiết kế chuẩn tỷ lệ, chữ nằm gọn hoàn toàn trong nhãn) -->
+            <div class="fig22-card" data-mol="acetic" tabindex="0" role="button">
+              <div class="fig22-svg-box">
+                <svg viewBox="0 0 160 125" width="150" height="116" aria-label="Chai giấm gạo lên men chứa Acetic acid">
+                  <defs>
+                    <linearGradient id="bottleGlass" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#F8FAFC" />
+                      <stop offset="50%" stop-color="#FFFFFF" />
+                      <stop offset="100%" stop-color="#E2E8F0" />
+                    </linearGradient>
+                    <linearGradient id="vinegarLiquid" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#FEF3C7" />
+                      <stop offset="100%" stop-color="#FDE68A" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Nền tròn dịu -->
+                  <circle cx="80" cy="62" r="52" fill="#ECFDF5" />
+                  <!-- Nắp chai có khía răng cưa nổi bật -->
+                  <rect x="64" y="8" width="32" height="13" rx="3.5" fill="#F59E0B" stroke="#B45309" stroke-width="1.6" />
+                  <line x1="71" y1="9" x2="71" y2="20" stroke="#B45309" stroke-width="1.2" opacity="0.6" />
+                  <line x1="77" y1="9" x2="77" y2="20" stroke="#B45309" stroke-width="1.2" opacity="0.6" />
+                  <line x1="83" y1="9" x2="83" y2="20" stroke="#B45309" stroke-width="1.2" opacity="0.6" />
+                  <line x1="89" y1="9" x2="89" y2="20" stroke="#B45309" stroke-width="1.2" opacity="0.6" />
+                  <!-- Vòng cổ chai -->
+                  <rect x="62" y="21" width="36" height="4.5" rx="2" fill="#D97706" />
+                  <!-- Thân chai giấm bầu rộng cân đối -->
+                  <path d="M65 25.5 L45 45 C42 48 41 52 41 57 L41 105 C41 109.5 44.5 113 49 113 L111 113 C115.5 113 119 109.5 119 105 L119 57 C119 52 118 48 115 45 L95 25.5 Z" fill="url(#bottleGlass)" stroke="#64748B" stroke-width="2.2" stroke-linejoin="round" />
+                  <!-- Dung dịch giấm gạo vàng dịu bên trong chai -->
+                  <path d="M43.5 52 L116.5 52 L116.5 104 C116.5 107.5 114 110.5 110 110.5 L50 110.5 C46 110.5 43.5 107.5 43.5 104 Z" fill="url(#vinegarLiquid)" />
+                  <!-- Vệt bóng sáng trên thành chai -->
+                  <path d="M46 53 L46 102" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+                  <!-- Nhãn chai xanh lá rộng rãi (rộng 66px) bao trọn dòng chữ bên trong -->
+                  <rect x="47" y="54" width="66" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="2" />
+                  <rect x="50" y="57" width="60" height="38" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1" />
+                  <!-- Biểu tượng giọt giấm / bông lúa nhỏ trên nhãn -->
+                  <path d="M80 60 C77.5 63.5 76.5 65.5 76.5 67.2 A3.5 3.5 0 0 0 83.5 67.2 C83.5 65.5 82.5 63.5 80 60 Z" fill="#16A34A" />
+                  <!-- Chữ GIẤM GẠO và Lên Men nằm gọn 100% trong khung nhãn -->
+                  <text x="80" y="79" text-anchor="middle" font-size="9.2" font-weight="900" fill="#14532D">GIẤM GẠO</text>
+                  <text x="80" y="90" text-anchor="middle" font-size="8" font-weight="800" fill="#B45309">Lên Men</text>
+                </svg>
+              </div>
+              <div style="font-weight: 800; color: var(--text-main);">🍾 Chai Giấm gạo lên men</div>
+              <div class="chem-formula-badge"><span class="carbon-highlight">C</span>H<sub>3</sub><span class="carbon-highlight">C</span>OOH (Acetic acid)</div>
+              <p style="font-size: 0.86rem; color: var(--text-secondary);">Có trong thành phần của các loại giấm ăn (vị chua).</p>
+              <div class="fig22-secret" style="margin-top: 8px; font-size: 0.82rem; font-weight: 800; color: var(--primary-plum-bright);">
+                👆 Click để kiểm tra nguyên tố!
+              </div>
+            </div>
+
+            <!-- Card 4: Urea -->
+            <div class="fig22-card" data-mol="urea" tabindex="0" role="button">
+              <div class="fig22-svg-box">
+                <svg viewBox="0 0 160 125" width="150" height="116" aria-label="Các hạt phân đạm Urea">
+                  <defs>
+                    <radialGradient id="ureaPearl" cx="35%" cy="30%" r="70%">
+                      <stop offset="0%" stop-color="#FFFFFF" />
+                      <stop offset="65%" stop-color="#F1F5F9" />
+                      <stop offset="100%" stop-color="#CBD5E1" />
+                    </radialGradient>
+                  </defs>
+                  <!-- Nền tròn dịu -->
+                  <circle cx="80" cy="62" r="52" fill="#F0F9FF" />
+                  <!-- Chồi lá xanh tươi tượng trưng cây trồng -->
+                  <path d="M80 34 C80 22 94 16 102 20 C98 28 90 34 80 34 Z" fill="#22C55E" stroke="#15803D" stroke-width="1.5" />
+                  <path d="M80 34 C80 24 68 18 60 22 C64 30 72 34 80 34 Z" fill="#4ADE80" stroke="#15803D" stroke-width="1.5" />
+                  <line x1="80" y1="32" x2="80" y2="44" stroke="#15803D" stroke-width="2.2" stroke-linecap="round" />
+                  <!-- Các hạt phân đạm Urê tròn trắng bóng xếp lớp 3D -->
+                  <circle cx="54" cy="66" r="9.5" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="70" cy="60" r="10" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="88" cy="60" r="10" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="104" cy="66" r="9.5" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="79" cy="49" r="9.5" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="63" cy="52" r="8.5" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="95" cy="52" r="8.5" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="44" cy="76" r="9" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="61" cy="75" r="10" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="79" cy="74" r="10.5" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="97" cy="75" r="10" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <circle cx="114" cy="76" r="9" fill="url(#ureaPearl)" stroke="#94A3B8" stroke-width="1.4" />
+                  <!-- Đĩa sứ đựng hạt phân đạm -->
+                  <path d="M28 78 Q80 92 132 78 L120 100 Q80 110 40 100 Z" fill="#0284C7" stroke="#0369A1" stroke-width="2" stroke-linejoin="round" />
+                  <rect x="52" y="85" width="56" height="14" rx="7" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.2" />
+                  <text x="80" y="94.5" text-anchor="middle" font-size="7.5" font-weight="900" fill="#854D0E">ĐẠM URÊ</text>
+                </svg>
+              </div>
+              <div style="font-weight: 800; color: var(--text-main);">🌾 Hạt phân đạm Urê</div>
+              <div class="chem-formula-badge"><span class="carbon-highlight">C</span>O(NH<sub>2</sub>)<sub>2</sub> (Urea)</div>
+              <p style="font-size: 0.86rem; color: var(--text-secondary);">Một loại phân đạm quan trọng cung cấp dinh dưỡng cho cây trồng.</p>
+              <div class="fig22-secret" style="margin-top: 8px; font-size: 0.82rem; font-weight: 800; color: var(--primary-plum-bright);">
+                👆 Click để kiểm tra nguyên tố!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Câu hỏi kích hoạt tư duy Warm-up -->
+        <div class="story-box">
+          <h3 style="color: #92400E; margin-bottom: 10px;">
+            💡 Câu hỏi Khởi động (Trang 102 SGK):
+          </h3>
+          <p style="margin-bottom: 14px; font-weight: 600;">
+            Quan sát công thức của 4 hợp chất hữu cơ phổ biến trong <strong>Hình 22.1</strong> (<strong>C<sub>4</sub>H<sub>10</sub></strong>, <strong>C<sub>2</sub>H<sub>5</sub>OH</strong>, <strong>CH<sub>3</sub>COOH</strong>, <strong>CO(NH<sub>2</sub>)<sub>2</sub></strong>), em hãy cho biết <strong>đặc điểm chung về thành phần nguyên tố</strong> của các phân tử hợp chất hữu cơ là gì?
+          </p>
+          <div class="options-grid">
+            <button type="button" class="btn btn-outline warmup-option-btn" data-correct="true" style="justify-content: flex-start; text-align: left;">
+              A. Tất cả các phân tử hợp chất hữu cơ đều nhất thiết chứa nguyên tố Carbon (C).
+            </button>
+            <button type="button" class="btn btn-outline warmup-option-btn" data-correct="false" style="justify-content: flex-start; text-align: left;">
+              B. Tất cả các phân tử hợp chất hữu cơ đều bắt buộc phải chứa nguyên tố Oxygen (O).
+            </button>
+            <button type="button" class="btn btn-outline warmup-option-btn" data-correct="false" style="justify-content: flex-start; text-align: left;">
+              C. Tất cả các phân tử hợp chất hữu cơ đều chứa nguyên tố Nitrogen (N).
+            </button>
+          </div>
+          <div id="warmup-quiz-feedback" class="feedback-box" role="status"></div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 2: KHÁM PHÁ KIẾN THỨC (KNOWLEDGE MODULES I, II, III, IV)
+           ==================================================================== -->
+      <section id="sec-knowledge" class="lesson-section">
+        <div class="section-header">
+          <div>
+            <span class="section-step-tag">Section 2 • Khám phá kiến thức (Knowledge Modules)</span>
+            <h2 class="section-title">🔬 Hệ thống 4 Module Kiến thức Trọng tâm Bài 22</h2>
+            <p class="section-subtitle">
+              Hãy chuyển qua từng Module (I &rarr; IV) hoặc xem toàn bộ các Thẻ kiến thức trực quan kèm mô phỏng tương tác!
+            </p>
+          </div>
+          <button type="button" id="show-all-modules-btn" class="btn btn-blue">
+            📖 Hiển thị tất cả 4 Module cùng lúc
+          </button>
+        </div>
+
+        <!-- Thanh chọn Module -->
+        <div class="module-tabs" role="tablist">
+          <button type="button" class="module-tab-btn active" data-mod="mod-1">
+            I. Khái niệm Hợp chất hữu cơ<br /><small style="opacity:0.85;">Định nghĩa &amp; Các ngoại lệ vô cơ</small>
+          </button>
+          <button type="button" class="module-tab-btn" data-mod="mod-2">
+            II. CT Phân tử &amp; CT Cấu tạo<br /><small style="opacity:0.85;">Hình 22.2 &amp; CTCT thu gọn</small>
+          </button>
+          <button type="button" class="module-tab-btn" data-mod="mod-3">
+            III. Đặc điểm cấu tạo<br /><small style="opacity:0.85;">Hóa trị IV, Mạch C (H.22.3) &amp; Bảng 22.1</small>
+          </button>
+          <button type="button" class="module-tab-btn" data-mod="mod-4">
+            IV. Phân loại Hợp chất hữu cơ<br /><small style="opacity:0.85;">Hydrocarbon &amp; Dẫn xuất</small>
+          </button>
+        </div>
+
+        <!-- MODULE I: KHÁI NIỆM HỢP CHẤT HỮU CƠ & HÓA HỌC HỮU CƠ -->
+        <div id="mod-1" class="knowledge-module-panel">
+          <div class="knowledge-card-grid">
+            <div class="k-card plum-border">
+              <span class="lesson-badge">Mục I • Khái niệm cốt lõi</span>
+              <h3 style="margin-top: 8px;">🧬 1. Hợp chất hữu cơ &amp; Hóa học hữu cơ là gì?</h3>
+              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+                <li>
+                  <strong>Hợp chất hữu cơ:</strong> Là hợp chất của <strong>carbon (C)</strong>, <em>trừ</em> một số hợp chất vô cơ của carbon như:
+                  <ul style="padding-left: 18px; margin-top: 4px;">
+                    <li>Carbon monoxide (<strong>CO</strong>), carbon dioxide (<strong>CO<sub>2</sub></strong>)</li>
+                    <li>Carbonic acid (<strong>H<sub>2</sub>CO<sub>3</sub></strong>)</li>
+                    <li>Các muối carbonate (<strong>CaCO<sub>3</sub>, Na<sub>2</sub>CO<sub>3</sub>, MgCO<sub>3</sub>,...</strong>), muối hydrogencarbonate (<strong>NaHCO<sub>3</sub>,...</strong>), cyanide, carbide,...</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Hóa học hữu cơ:</strong> Ngành khoa học chuyên nghiên cứu về các hợp chất hữu cơ là một chuyên ngành của ngành Hóa học, được đặt tên là chuyên ngành <strong><em>Hóa học hữu cơ</em></strong>.
+                </li>
+              </ul>
+            </div>
+
+            <div class="k-card amber-border">
+              <span class="lesson-badge">🔭 Góc Mở rộng SGK (Trang 103)</span>
+              <h3 style="margin-top: 8px;">📜 Câu chuyện Lịch sử: Phá vỡ thuyết "Lực sống"</h3>
+              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+                <li>
+                  <strong>Năm 1806:</strong> Nhà hóa học người Thụy Điển <strong>Jacob Berzelius</strong> đưa ra thuật ngữ <em>"hóa học hữu cơ"</em> lần đầu tiên khi nghiên cứu các hợp chất có nguồn gốc sinh vật (thời đó người ta tưởng rằng chất hữu cơ chỉ tạo ra được trong cơ thể sống nhờ "lực sống").
+                </li>
+                <li>
+                  <strong>Năm 1828 (Bước ngoặt lịch sử):</strong> Nhà hóa học người Đức <strong>Friedrich Wöhler</strong> đã tổng hợp thành công chất hữu cơ <strong>Urea – CO(NH<sub>2</sub>)<sub>2</sub></strong> từ chất vô cơ trong phòng thí nghiệm! Từ đó, thuật ngữ "hóa học hữu cơ" bắt đầu được hiểu như ngày nay.
+                </li>
+              </ul>
+
+              <div style="margin-top: 14px; background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1.5px solid #F59E0B;">
+                <div style="font-weight: 800; color: var(--primary-plum); margin-bottom: 6px;">
+                  ⚡ Kiểm tra nhanh 3 giây: Phân tử CaCO<sub>3</sub> (đá vôi) có chứa nguyên tố C. Vậy CaCO<sub>3</sub> là chất hữu cơ hay vô cơ?
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button type="button" class="btn btn-outline mod1-quick-btn" data-correct="true" style="padding: 6px 14px; font-size: 0.88rem;">
+                    A. Chất vô cơ (vì là muối carbonate ngoại lệ)
+                  </button>
+                  <button type="button" class="btn btn-outline mod1-quick-btn" data-correct="false" style="padding: 6px 14px; font-size: 0.88rem;">
+                    B. Chất hữu cơ (vì có chứa nguyên tố C)
+                  </button>
+                </div>
+                <div id="mod1-quick-fb" class="feedback-box"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULE II: CÔNG THỨC PHÂN TỬ VÀ CÔNG THỨC CẤU TẠO (HÌNH 22.2) -->
+        <div id="mod-2" class="knowledge-module-panel hidden">
+          <div class="knowledge-card-grid">
+            <div class="k-card">
+              <span class="lesson-badge">Mục II • Định nghĩa &amp; Ý nghĩa</span>
+              <h3 style="margin-top: 8px;">📐 1. Công thức phân tử vs Công thức cấu tạo</h3>
+              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+                <li>
+                  <strong>Công thức phân tử (CTPT):</strong> Là công thức cho biết <strong>thành phần nguyên tố</strong> và <strong>số lượng nguyên tử</strong> của mỗi nguyên tố trong phân tử.<br />
+                  <em>Ví dụ:</em> Ethane có CTPT là <strong>C<sub>2</sub>H<sub>6</sub></strong> (gồm 2 nguyên tử C và 6 nguyên tử H).
+                </li>
+                <li>
+                  <strong>Công thức cấu tạo (CTCT):</strong> Là công thức cho biết <strong>trật tự liên kết</strong> và <strong>cách thức liên kết</strong> giữa các nguyên tử trong phân tử.
+                </li>
+                <li>
+                  <strong>Biểu diễn liên kết cộng hóa trị:</strong>
+                  <ul style="padding-left: 18px; margin-top: 4px;">
+                    <li><strong>Liên kết đơn (1 cặp e dùng chung):</strong> biểu diễn bằng một gạch nối (<strong>&ndash;</strong>), ví dụ: C&ndash;C, C&ndash;H, C&ndash;O&ndash;H.</li>
+                    <li><strong>Liên kết đôi (2 cặp e dùng chung):</strong> biểu diễn bằng hai gạch nối (<strong>=</strong>), ví dụ: C=C.</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Công thức cấu tạo thu gọn:</strong> Viết gộp các nguyên tử H vào nguyên tử liên kết với nó thành từng nhóm (như <strong>&ndash;CH<sub>3</sub>, &ndash;CH<sub>2</sub>&ndash;, &ndash;CH=, &ndash;OH</strong>).
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bảng ví dụ C2H6 và C2H4 trong SGK trang 103 -->
+            <div class="k-card plum-border">
+              <span class="lesson-badge">Bảng Ví dụ SGK (Trang 103)</span>
+              <h3 style="margin-top: 8px;">🔍 So sánh 3 cách biểu diễn công thức của Ethane &amp; Ethylene</h3>
+              <div class="table-responsive">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Công thức phân tử</th>
+                      <th>Công thức cấu tạo dạng đầy đủ</th>
+                      <th>Công thức cấu tạo dạng thu gọn</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align:center; font-size:1.1rem;"><strong>C<sub>2</sub>H<sub>6</sub></strong><br /><small>(Ethane)</small></td>
+                      <td>
+                        <svg viewBox="0 0 150 95" width="140" height="88" aria-label="CTCT đầy đủ của C2H6">
+                          <text x="52" y="18" font-weight="800" font-size="13">H</text>
+                          <text x="90" y="18" font-weight="800" font-size="13">H</text>
+                          <line x1="57" y1="22" x2="57" y2="36" stroke="#0F172A" stroke-width="2"/>
+                          <line x1="95" y1="22" x2="95" y2="36" stroke="#0F172A" stroke-width="2"/>
+                          <text x="16" y="52" font-weight="800" font-size="13">H</text>
+                          <line x1="30" y1="47" x2="48" y2="47" stroke="#0F172A" stroke-width="2"/>
+                          <text x="52" y="52" font-weight="900" font-size="14" fill="#831843">C</text>
+                          <line x1="65" y1="47" x2="87" y2="47" stroke="#0F172A" stroke-width="2"/>
+                          <text x="90" y="52" font-weight="900" font-size="14" fill="#831843">C</text>
+                          <line x1="103" y1="47" x2="121" y2="47" stroke="#0F172A" stroke-width="2"/>
+                          <text x="125" y="52" font-weight="800" font-size="13">H</text>
+                          <line x1="57" y1="57" x2="57" y2="71" stroke="#0F172A" stroke-width="2"/>
+                          <line x1="95" y1="57" x2="95" y2="71" stroke="#0F172A" stroke-width="2"/>
+                          <text x="52" y="86" font-weight="800" font-size="13">H</text>
+                          <text x="90" y="86" font-weight="800" font-size="13">H</text>
+                        </svg>
+                      </td>
+                      <td style="font-size:1.08rem; font-weight:800; color:var(--primary-blue-deep);">
+                        CH<sub>3</sub>&ndash;CH<sub>3</sub>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:center; font-size:1.1rem;"><strong>C<sub>2</sub>H<sub>4</sub></strong><br /><small>(Ethylene)</small></td>
+                      <td>
+                        <svg viewBox="0 0 150 90" width="140" height="82" aria-label="CTCT đầy đủ của C2H4">
+                          <text x="32" y="20" font-weight="800" font-size="13">H</text>
+                          <text x="108" y="20" font-weight="800" font-size="13">H</text>
+                          <line x1="43" y1="24" x2="53" y2="38" stroke="#0F172A" stroke-width="2"/>
+                          <line x1="107" y1="24" x2="97" y2="38" stroke="#0F172A" stroke-width="2"/>
+                          <text x="52" y="52" font-weight="900" font-size="14" fill="#831843">C</text>
+                          <line x1="65" y1="44" x2="87" y2="44" stroke="#DC2626" stroke-width="2.2"/>
+                          <line x1="65" y1="50" x2="87" y2="50" stroke="#DC2626" stroke-width="2.2"/>
+                          <text x="90" y="52" font-weight="900" font-size="14" fill="#831843">C</text>
+                          <line x1="53" y1="56" x2="43" y2="70" stroke="#0F172A" stroke-width="2"/>
+                          <line x1="97" y1="56" x2="107" y2="70" stroke="#0F172A" stroke-width="2"/>
+                          <text x="32" y="84" font-weight="800" font-size="13">H</text>
+                          <text x="108" y="84" font-weight="800" font-size="13">H</text>
+                        </svg>
+                      </td>
+                      <td style="font-size:1.08rem; font-weight:800; color:var(--primary-blue-deep);">
+                        CH<sub>2</sub>=CH<sub>2</sub>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- HÌNH 22.2 TƯƠNG TÁC (6 CÔNG THỨC TỪ 1 ĐẾN 6 TRANG 103 SGK) -->
+          <div style="background: #F0F9FF; border: 2px solid var(--primary-blue); border-radius: 18px; padding: 22px; margin-top: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <span class="lesson-badge">Hình 22.2 SGK (Trang 103) • Hoạt động khám phá</span>
+                <h3 style="color: var(--primary-blue-deep); margin-top: 6px;">
+                  🧩 Quan sát 6 công thức từ (1) đến (6) trong Hình 22.2 và bấm nút chuyển sang dạng Thu gọn!
+                </h3>
+              </div>
+              <button type="button" id="toggle-fig22-2-condensed-btn" class="btn btn-yellow">
+                ✨ Hiện / Ẩn CTCT thu gọn của (2), (3), (5), (6)
+              </button>
+            </div>
+
+            <div class="formula-showcase-grid">
+              <!-- (1) C4H10 -->
+              <div class="formula-box-card">
+                <div class="number-circle">1</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: var(--primary-plum); margin: 18px 0;">
+                  C<sub>4</sub>H<sub>10</sub>
+                </div>
+                <span class="lesson-badge" style="background:#E0F2FE; color:#0369A1;">Công thức phân tử (CTPT)</span>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">
+                  Cho biết phân tử có 4 nguyên tử C và 10 nguyên tử H.
+                </p>
+              </div>
+
+              <!-- (2) Mạch thẳng C4H10 -->
+              <div class="formula-box-card">
+                <div class="number-circle">2</div>
+                <div style="background: #F8FAFC; padding: 6px; border-radius: 10px; display:flex; justify-content:center;">
+                  <svg viewBox="0 0 210 92" width="195" height="84" aria-label="CTCT mạch thẳng C4H10">
+                    <!-- Hàng H trên -->
+                    <text x="45" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="85" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="125" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="165" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="45" y1="22" x2="45" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="85" y1="22" x2="85" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="125" y1="22" x2="125" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="165" y1="22" x2="165" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <!-- Hàng C giữa -->
+                    <text x="12" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="20" y1="46" x2="36" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="45" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="54" y1="46" x2="76" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="85" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="94" y1="46" x2="116" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="125" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="134" y1="46" x2="156" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="165" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="174" y1="46" x2="190" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="198" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <!-- Hàng H dưới -->
+                    <line x1="45" y1="55" x2="45" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="85" y1="55" x2="85" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="125" y1="55" x2="125" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="165" y1="55" x2="165" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="45" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="85" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="125" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="165" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                  </svg>
+                </div>
+                <span class="lesson-badge" style="background:#FCE7F3; color:#831843; margin-top:6px;">Công thức cấu tạo (CTCT)</span>
+                <div class="condensed-reveal hidden" style="margin-top:8px; padding:6px; background:#FEF3C7; border-radius:8px; font-weight:800; color:#92400E;">
+                  Thu gọn: CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;CH<sub>2</sub>&ndash;CH<sub>3</sub><br/>
+                  <small>(Cùng CTPT C<sub>4</sub>H<sub>10</sub> với công thức 3)</small>
+                </div>
+              </div>
+
+              <!-- (3) Mạch nhánh C4H10 -->
+              <div class="formula-box-card">
+                <div class="number-circle">3</div>
+                <div style="background: #F8FAFC; padding: 6px; border-radius: 10px; display:flex; justify-content:center;">
+                  <svg viewBox="0 0 190 92" width="180" height="84" aria-label="CTCT mạch nhánh C4H10">
+                    <!-- Nhánh CH3 trên -->
+                    <text x="95" y="16" text-anchor="middle" font-weight="800" font-size="12" fill="#831843">CH<tspan dy="3" font-size="9">3</tspan></text>
+                    <line x1="95" y1="21" x2="95" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="135" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="55" y1="22" x2="55" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="135" y1="22" x2="135" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <!-- Hàng 3C ngang -->
+                    <text x="20" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="28" y1="46" x2="46" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="64" y1="46" x2="86" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="95" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="104" y1="46" x2="126" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="135" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="144" y1="46" x2="162" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="170" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <!-- Hàng H dưới -->
+                    <line x1="55" y1="55" x2="55" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="95" y1="55" x2="95" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="135" y1="55" x2="135" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="95" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="135" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                  </svg>
+                </div>
+                <span class="lesson-badge" style="background:#FCE7F3; color:#831843; margin-top:6px;">Công thức cấu tạo (CTCT)</span>
+                <div class="condensed-reveal hidden" style="margin-top:8px; padding:6px; background:#FEF3C7; border-radius:8px; font-weight:800; color:#92400E;">
+                  Thu gọn: CH<sub>3</sub>&ndash;CH(CH<sub>3</sub>)&ndash;CH<sub>3</sub><br/>
+                  <small>(Cùng CTPT C<sub>4</sub>H<sub>10</sub> với công thức 2)</small>
+                </div>
+              </div>
+
+              <!-- (4) C2H6O -->
+              <div class="formula-box-card">
+                <div class="number-circle">4</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: var(--primary-plum); margin: 18px 0;">
+                  C<sub>2</sub>H<sub>6</sub>O
+                </div>
+                <span class="lesson-badge" style="background:#E0F2FE; color:#0369A1;">Công thức phân tử (CTPT)</span>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">
+                  Cho biết phân tử có 2 nguyên tử C, 6 nguyên tử H và 1 nguyên tử O.
+                </p>
+              </div>
+
+              <!-- (5) CH3-CH2-OH -->
+              <div class="formula-box-card">
+                <div class="number-circle">5</div>
+                <div style="background: #F8FAFC; padding: 6px; border-radius: 10px; display:flex; justify-content:center;">
+                  <svg viewBox="0 0 190 92" width="180" height="84" aria-label="CTCT đầy đủ của Ethylic alcohol">
+                    <text x="55" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="95" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="55" y1="22" x2="55" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="95" y1="22" x2="95" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="20" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="28" y1="46" x2="46" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="64" y1="46" x2="86" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="95" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="104" y1="46" x2="124" y2="46" stroke="#DC2626" stroke-width="2"/>
+                    <text x="134" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#DC2626">O</text>
+                    <line x1="144" y1="46" x2="162" y2="46" stroke="#DC2626" stroke-width="2"/>
+                    <text x="170" y="50" text-anchor="middle" font-weight="800" font-size="12" fill="#DC2626">H</text>
+                    <line x1="55" y1="55" x2="55" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="95" y1="55" x2="95" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="95" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                  </svg>
+                </div>
+                <span class="lesson-badge" style="background:#FCE7F3; color:#831843; margin-top:6px;">Công thức cấu tạo (CTCT)</span>
+                <div class="condensed-reveal hidden" style="margin-top:8px; padding:6px; background:#FEF3C7; border-radius:8px; font-weight:800; color:#92400E;">
+                  Thu gọn: CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;OH (hoặc C<sub>2</sub>H<sub>5</sub>OH)<br/>
+                  <small>(Cùng CTPT C<sub>2</sub>H<sub>6</sub>O với công thức 6)</small>
+                </div>
+              </div>
+
+              <!-- (6) CH3-O-CH3 -->
+              <div class="formula-box-card">
+                <div class="number-circle">6</div>
+                <div style="background: #F8FAFC; padding: 6px; border-radius: 10px; display:flex; justify-content:center;">
+                  <svg viewBox="0 0 190 92" width="180" height="84" aria-label="CTCT đầy đủ của Dimethyl ether">
+                    <text x="55" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="135" y="18" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="55" y1="22" x2="55" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="135" y1="22" x2="135" y2="35" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="20" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="28" y1="46" x2="46" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="64" y1="46" x2="84" y2="46" stroke="#DC2626" stroke-width="2"/>
+                    <text x="95" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#DC2626">O</text>
+                    <line x1="106" y1="46" x2="126" y2="46" stroke="#DC2626" stroke-width="2"/>
+                    <text x="135" y="50" text-anchor="middle" font-weight="800" font-size="13" fill="#831843">C</text>
+                    <line x1="144" y1="46" x2="162" y2="46" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="170" y="50" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <line x1="55" y1="55" x2="55" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <line x1="135" y1="55" x2="135" y2="68" stroke="#0F172A" stroke-width="1.8"/>
+                    <text x="55" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                    <text x="135" y="82" text-anchor="middle" font-weight="700" font-size="12">H</text>
+                  </svg>
+                </div>
+                <span class="lesson-badge" style="background:#FCE7F3; color:#831843; margin-top:6px;">Công thức cấu tạo (CTCT)</span>
+                <div class="condensed-reveal hidden" style="margin-top:8px; padding:6px; background:#FEF3C7; border-radius:8px; font-weight:800; color:#92400E;">
+                  Thu gọn: CH<sub>3</sub>&ndash;O&ndash;CH<sub>3</sub><br/>
+                  <small>(Cùng CTPT C<sub>2</sub>H<sub>6</sub>O với công thức 5)</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULE III: ĐẶC ĐIỂM CẤU TẠO HỢP CHẤT HỮU CƠ (HÌNH 22.3 & BẢNG 22.1) -->
+        <div id="mod-3" class="knowledge-module-panel hidden">
+          <div class="knowledge-card-grid">
+            <div class="k-card plum-border">
+              <span class="lesson-badge">Mục III • Đặc điểm cấu tạo</span>
+              <h3 style="margin-top: 8px;">⚛️ 1. Hóa trị IV của Carbon &amp; Liên kết cộng hóa trị</h3>
+              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+                <li>
+                  <strong>Thành phần nguyên tố:</strong> Nhất thiết phải chứa nguyên tố <strong>carbon (C)</strong>, thường có H, O, N, Cl, S,... (chủ yếu là các nguyên tố phi kim).
+                </li>
+                <li>
+                  <strong>Liên kết hóa học chủ yếu:</strong> Là <strong>liên kết cộng hóa trị</strong>.
+                </li>
+                <li>
+                  <strong>Hóa trị không đổi trong hợp chất hữu cơ:</strong>
+                  <strong style="color:#DC2626;">Carbon luôn có hóa trị IV</strong> (xung quanh mỗi nguyên tử C luôn có đúng 4 gạch liên kết); Hydrogen (H) có hóa trị I; Oxygen (O) có hóa trị II; Chlorine (Cl) có hóa trị I.
+                </li>
+                <li>
+                  <strong>Hệ quả quan trọng:</strong> Các nguyên tử C có thể liên kết trực tiếp với nhau tạo thành <strong>mạch carbon</strong> &rarr; Làm cho số lượng chất hữu cơ vô cùng lớn và nhiều chất hữu cơ khác nhau lại có cùng một công thức phân tử!
+                </li>
+              </ul>
+            </div>
+
+            <div class="k-card">
+              <span class="lesson-badge">Hình 22.3 SGK (Trang 103)</span>
+              <h3 style="margin-top: 8px;">🔗 2. Ba dạng Mạch Carbon cơ bản</h3>
+              <div class="chain-cards-grid" style="grid-template-columns: 1fr; gap: 10px; margin: 8px 0;">
+                <div style="background:#FFF; border:1.5px solid #0284C7; border-radius:12px; padding:10px 14px; text-align:left;">
+                  <strong style="color:#0369A1;">a) Mạch hở, không phân nhánh (mạch thẳng):</strong><br/>
+                  <span style="font-size:1.02rem; font-weight:800; color:#831843;">CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;CH<sub>2</sub>&ndash;CH<sub>3</sub></span>
+                  <span style="font-size:0.86rem; color:#475569;"> (Các nguyên tử C nối tiếp nhau trên một đường thẳng).</span>
+                </div>
+                <div style="background:#FFF; border:1.5px solid #F59E0B; border-radius:12px; padding:10px 14px; text-align:left;">
+                  <strong style="color:#B45309;">b) Mạch hở, phân nhánh (mạch nhánh):</strong><br/>
+                  <span style="font-size:1.02rem; font-weight:800; color:#831843;">CH<sub>3</sub>&ndash;CH(CH<sub>3</sub>)&ndash;CH<sub>3</sub></span>
+                  <span style="font-size:0.86rem; color:#475569;"> (Có nguyên tử C liên kết với 3 hoặc 4 nguyên tử C khác tạo nhánh).</span>
+                </div>
+                <div style="background:#FFF; border:1.5px solid #059669; border-radius:12px; padding:10px 14px; text-align:left; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                  <div>
+                    <strong style="color:#065F46;">c) Mạch vòng (Cyclobutane):</strong><br/>
+                    <span style="font-size:0.86rem; color:#475569;">4 nhóm CH<sub>2</sub> khép kín tạo thành vòng tứ giác.</span>
+                  </div>
+                  <svg viewBox="0 0 115 62" width="110" height="58" aria-label="Mạch vòng CH2-CH2">
+                    <text x="26" y="18" text-anchor="middle" font-weight="800" font-size="11.5" fill="#831843">CH<tspan dy="3" font-size="8.5">2</tspan></text>
+                    <line x1="42" y1="14" x2="72" y2="14" stroke="#065F46" stroke-width="2"/>
+                    <text x="89" y="18" text-anchor="middle" font-weight="800" font-size="11.5" fill="#831843">CH<tspan dy="3" font-size="8.5">2</tspan></text>
+                    <line x1="24" y1="24" x2="24" y2="39" stroke="#065F46" stroke-width="2"/>
+                    <line x1="87" y1="24" x2="87" y2="39" stroke="#065F46" stroke-width="2"/>
+                    <text x="26" y="53" text-anchor="middle" font-weight="800" font-size="11.5" fill="#831843">CH<tspan dy="3" font-size="8.5">2</tspan></text>
+                    <line x1="42" y1="49" x2="72" y2="49" stroke="#065F46" stroke-width="2"/>
+                    <text x="89" y="53" text-anchor="middle" font-weight="800" font-size="11.5" fill="#831843">CH<tspan dy="3" font-size="8.5">2</tspan></text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BẢNG 22.1 & PHÒNG THÍ NGHIỆM ẢO TƯƠNG TÁC -->
+          <div style="background: #FFFBEB; border: 2px solid var(--accent-yellow); border-radius: 18px; padding: 22px; margin-top: 18px;">
+            <span class="lesson-badge">Bảng 22.1 SGK (Trang 104) &amp; Phòng Thí Nghiệm Ảo</span>
+            <h3 style="color: var(--primary-plum); margin-top: 6px;">
+              ⚗️ Sự phụ thuộc tính chất vào thành phần phân tử và cấu tạo hóa học
+            </h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 12px;">
+              Quan sát Bảng 22.1 và trực tiếp thực hành trên <strong>Bàn Thí Nghiệm Ảo</strong> bên dưới: <strong>Ethylic alcohol</strong> và <strong>Dimethyl ether</strong> có <strong>cùng công thức phân tử C<sub>2</sub>H<sub>6</sub>O</strong> nhưng lại có công thức cấu tạo khác nhau. Hãy thả mẩu kim loại <strong>Natri (Na)</strong> hoặc kiểm tra <strong>độ tan trong nước</strong>!
+            </p>
+
+            <div class="table-responsive">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Chất</th>
+                    <th>Methyl chloride</th>
+                    <th>Ethylic alcohol</th>
+                    <th>Dimethyl ether</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Công thức phân tử</td>
+                    <td><strong>CH<sub>3</sub>Cl</strong></td>
+                    <td><strong style="color:#DC2626;">C<sub>2</sub>H<sub>6</sub>O</strong></td>
+                    <td><strong style="color:#DC2626;">C<sub>2</sub>H<sub>6</sub>O</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Công thức cấu tạo</td>
+                    <td><strong>CH<sub>3</sub>&ndash;Cl</strong></td>
+                    <td><strong style="color:#0369A1;">CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;OH</strong> (có nhóm &ndash;OH)</td>
+                    <td><strong style="color:#831843;">CH<sub>3</sub>&ndash;O&ndash;CH<sub>3</sub></strong> (không có &ndash;OH)</td>
+                  </tr>
+                  <tr>
+                    <td>Tính chất vật lí</td>
+                    <td>Chất khí, tan rất ít trong nước</td>
+                    <td><strong>Chất lỏng, tan vô hạn trong nước</strong></td>
+                    <td>Chất khí, tan ít trong nước</td>
+                  </tr>
+                  <tr>
+                    <td>Tính chất hóa học</td>
+                    <td>Không tác dụng với natri</td>
+                    <td style="background:#DCFCE7; font-weight:800; color:#065F46;">✅ Tác dụng với natri (sủi bọt khí H<sub>2</sub>)</td>
+                    <td>Không tác dụng với natri</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- SÂN KHẤU PHÒNG THÍ NGHIỆM ẢO 3 ỐNG NGHIỆM (VIRTUAL LAB) -->
+            <div class="vlab-container" id="vlab-table22">
+              <div class="vlab-header">
+                <div>
+                  <span class="lesson-badge" style="background:#38BDF8; color:#0F172A;">🔬 Mô phỏng Phòng Thí Nghiệm Ảo KHTN 9</span>
+                  <h4 style="font-size: 1.18rem; color: #FFFFFF; margin-top: 4px;">
+                    Thí nghiệm đối chứng 3 hợp chất hữu cơ (Bảng 22.1 SGK)
+                  </h4>
+                </div>
+                <div class="vlab-mode-bar">
+                  <button type="button" class="vlab-mode-btn active" id="vlab-mode-na-btn">
+                    <span>⚗️ Thí nghiệm 1: Tác dụng với Natri (Na)</span>
+                  </button>
+                  <button type="button" class="vlab-mode-btn" id="vlab-mode-water-btn">
+                    <span>💧 Thí nghiệm 2: Trạng thái &amp; Độ tan trong nước</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 3 TRẠM ỐNG NGHIỆM TRỰC QUAN -->
+              <div class="vlab-bench-grid">
+                <!-- ỐNG 1: METHYL CHLORIDE (CH3-Cl) -->
+                <div class="vlab-tube-station" id="station-tube-1">
+                  <div>
+                    <div class="vlab-tube-title">Ống 1: Methyl chloride</div>
+                    <div class="vlab-tube-formula">CTPT: CH<sub>3</sub>Cl &bull; CTCT: CH<sub>3</sub>&ndash;Cl</div>
+                  </div>
+
+                  <div class="vlab-svg-stage">
+                    <svg viewBox="0 0 180 215" width="170" height="202" aria-label="Ống nghiệm 1 chứa Methyl chloride">
+                      <!-- Miệng & thành ống nghiệm rộng rãi (rộng 76px) -->
+                      <rect x="46" y="32" width="88" height="8" rx="4" fill="#94A3B8" stroke="#CBD5E1" stroke-width="1" />
+                      <path d="M52 40 L52 152 A38 38 0 0 0 128 152 L128 40 Z" fill="rgba(255,255,255,0.07)" stroke="#CBD5E1" stroke-width="3" />
+                      <!-- Môi trường chất trong ống 1 -->
+                      <path id="liquid-tube-1" d="M54 102 L54 152 A36 36 0 0 0 126 152 L126 102 Z" fill="rgba(148, 163, 184, 0.28)" />
+                      <!-- Vạch chia độ & ánh thủy tinh -->
+                      <path d="M60 52 L60 144" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round" />
+                      <line x1="116" y1="65" x2="124" y2="65" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <line x1="116" y1="85" x2="124" y2="85" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <line x1="116" y1="105" x2="124" y2="105" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <!-- Hạt khí CH3Cl bay lơ lửng -->
+                      <g id="gas-dots-tube-1">
+                        <circle cx="72" cy="76" r="4" fill="#94A3B8" opacity="0.75" />
+                        <circle cx="108" cy="72" r="4" fill="#94A3B8" opacity="0.75" />
+                        <circle cx="90" cy="128" r="4" fill="#94A3B8" opacity="0.75" />
+                        <text x="90" y="95" text-anchor="middle" fill="#E2E8F0" font-size="9.5" font-weight="800">Khí CH<tspan dy="2" font-size="7.5">3</tspan><tspan dy="-2">Cl</tspan></text>
+                      </g>
+                      <!-- Mẩu kim loại Natri (Na) -->
+                      <g id="na-pellet-1" class="na-pellet">
+                        <rect x="79" y="108" width="22" height="14" rx="5" fill="#E2E8F0" stroke="#475569" stroke-width="1.8" />
+                        <text x="90" y="118" text-anchor="middle" fill="#0F172A" font-size="9" font-weight="800">Na</text>
+                      </g>
+                      <text x="90" y="205" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-weight="700">Không có nhóm &ndash;OH</text>
+                    </svg>
+                  </div>
+
+                  <div id="status-tube-1" class="vlab-status-pill">Trạng thái: Sẵn sàng thử nghiệm</div>
+                  <button type="button" class="btn btn-outline vlab-drop-single-btn" data-tube="1" style="width:100%; padding:8px 12px; font-size:0.86rem;">
+                    <span>🥢 Thả mẩu Na vào Ống 1 (CH<sub>3</sub>&ndash;Cl)</span>
+                  </button>
+                </div>
+
+                <!-- ỐNG 2: ETHYLIC ALCOHOL (CH3-CH2-OH) -->
+                <div class="vlab-tube-station" id="station-tube-2">
+                  <div>
+                    <div class="vlab-tube-title">Ống 2: Ethylic alcohol</div>
+                    <div class="vlab-tube-formula">CTPT: C<sub>2</sub>H<sub>6</sub>O &bull; CTCT: CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;<span style="color:#F87171;">OH</span></div>
+                  </div>
+
+                  <div class="vlab-svg-stage">
+                    <svg viewBox="0 0 180 215" width="170" height="202" aria-label="Ống nghiệm 2 chứa Ethylic alcohol">
+                      <!-- Ngọn lửa xanh khi thử khí H2 ở miệng ống -->
+                      <g id="flame-tube-2" class="h2-flame-group">
+                        <path d="M90 6 Q74 20 81 33 Q90 39 99 33 Q106 20 90 6 Z" fill="#38BDF8" opacity="0.92" />
+                        <path d="M90 13 Q82 23 85 31 Q90 35 95 31 Q98 23 90 13 Z" fill="#FEF08A" />
+                        <text x="90" y="10" text-anchor="middle" fill="#FDE047" font-size="9" font-weight="800">🔥 Khí H<tspan dy="2" font-size="7">2</tspan><tspan dy="-2"> cháy xanh!</tspan></text>
+                      </g>
+
+                      <!-- Miệng & thân ống nghiệm rộng rãi (rộng 76px) -->
+                      <rect x="46" y="32" width="88" height="8" rx="4" fill="#94A3B8" stroke="#BAE6FD" stroke-width="1" />
+                      <path d="M52 40 L52 152 A38 38 0 0 0 128 152 L128 40 Z" fill="rgba(255,255,255,0.08)" stroke="#38BDF8" stroke-width="3" />
+                      <!-- Chất lỏng Ethylic alcohol -->
+                      <path id="liquid-tube-2" d="M54 90 L54 152 A36 36 0 0 0 126 152 L126 90 Z" fill="rgba(56, 189, 248, 0.35)" />
+                      <!-- Vạch chia độ & ánh thủy tinh -->
+                      <path d="M60 52 L60 144" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" />
+                      <line x1="116" y1="65" x2="124" y2="65" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <line x1="116" y1="85" x2="124" y2="85" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <line x1="116" y1="105" x2="124" y2="105" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <text x="90" y="112" text-anchor="middle" fill="#E0F2FE" font-size="9.5" font-weight="800">Lỏng C<tspan dy="2" font-size="7.5">2</tspan><tspan dy="-2">H</tspan><tspan dy="2" font-size="7.5">5</tspan><tspan dy="-2">OH</tspan></text>
+
+                      <!-- Luồng bọt khí H2 sủi lên khi có Na -->
+                      <g id="bubbles-tube-2" class="h2-bubbles-group">
+                        <circle class="h2-bubble b1" cx="74" cy="135" r="4.5" fill="#FFFFFF" stroke="#38BDF8" stroke-width="1.2" />
+                        <circle class="h2-bubble b2" cx="92" cy="140" r="5.5" fill="#FFFFFF" stroke="#38BDF8" stroke-width="1.2" />
+                        <circle class="h2-bubble b3" cx="106" cy="132" r="4" fill="#FFFFFF" stroke="#38BDF8" stroke-width="1.2" />
+                        <circle class="h2-bubble b4" cx="84" cy="128" r="5" fill="#FFFFFF" stroke="#38BDF8" stroke-width="1.2" />
+                        <text x="90" y="66" text-anchor="middle" fill="#6EE7B7" font-size="9.5" font-weight="800">H<tspan dy="2" font-size="7.5">2</tspan><tspan dy="-2"> &uarr; sủi bọt</tspan></text>
+                      </g>
+
+                      <!-- Mẩu kim loại Natri (Na) -->
+                      <g id="na-pellet-2" class="na-pellet">
+                        <rect x="79" y="136" width="22" height="14" rx="6" fill="#F8FAFC" stroke="#F59E0B" stroke-width="2" />
+                        <text x="90" y="146" text-anchor="middle" fill="#0F172A" font-size="9" font-weight="800">Na</text>
+                      </g>
+                      <text x="90" y="205" text-anchor="middle" fill="#6EE7B7" font-size="10.5" font-weight="800">Có nhóm &ndash;OH linh động</text>
+                    </svg>
+                  </div>
+
+                  <div id="status-tube-2" class="vlab-status-pill">Trạng thái: Chất lỏng không màu</div>
+                  <button type="button" class="btn btn-primary vlab-drop-single-btn" data-tube="2" style="width:100%; padding:8px 12px; font-size:0.86rem;">
+                    <span>🧪 Thả Na vào Ethylic alcohol (CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;OH)</span>
+                  </button>
+                </div>
+
+                <!-- ỐNG 3: DIMETHYL ETHER (CH3-O-CH3) -->
+                <div class="vlab-tube-station" id="station-tube-3">
+                  <div>
+                    <div class="vlab-tube-title">Ống 3: Dimethyl ether</div>
+                    <div class="vlab-tube-formula">CTPT: C<sub>2</sub>H<sub>6</sub>O &bull; CTCT: CH<sub>3</sub>&ndash;O&ndash;CH<sub>3</sub></div>
+                  </div>
+
+                  <div class="vlab-svg-stage">
+                    <svg viewBox="0 0 180 215" width="170" height="202" aria-label="Ống nghiệm 3 chứa Dimethyl ether">
+                      <rect x="46" y="32" width="88" height="8" rx="4" fill="#94A3B8" stroke="#FBCFE8" stroke-width="1" />
+                      <path d="M52 40 L52 152 A38 38 0 0 0 128 152 L128 40 Z" fill="rgba(255,255,255,0.07)" stroke="#F472B6" stroke-width="3" />
+                      <path id="liquid-tube-3" d="M54 102 L54 152 A36 36 0 0 0 126 152 L126 102 Z" fill="rgba(244, 114, 182, 0.24)" />
+                      <!-- Vạch chia độ & ánh thủy tinh -->
+                      <path d="M60 52 L60 144" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round" />
+                      <line x1="116" y1="65" x2="124" y2="65" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <line x1="116" y1="85" x2="124" y2="85" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <line x1="116" y1="105" x2="124" y2="105" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                      <!-- Hạt khí CH3-O-CH3 -->
+                      <g id="gas-dots-tube-3">
+                        <circle cx="72" cy="76" r="4" fill="#F472B6" opacity="0.75" />
+                        <circle cx="108" cy="72" r="4" fill="#F472B6" opacity="0.75" />
+                        <circle cx="90" cy="128" r="4" fill="#F472B6" opacity="0.75" />
+                        <text x="90" y="95" text-anchor="middle" fill="#FCE7F3" font-size="9" font-weight="800">Khí CH<tspan dy="2" font-size="7">3</tspan><tspan dy="-2">OCH</tspan><tspan dy="2" font-size="7">3</tspan></text>
+                      </g>
+                      <!-- Mẩu kim loại Natri (Na) -->
+                      <g id="na-pellet-3" class="na-pellet">
+                        <rect x="79" y="108" width="22" height="14" rx="5" fill="#E2E8F0" stroke="#475569" stroke-width="1.8" />
+                        <text x="90" y="118" text-anchor="middle" fill="#0F172A" font-size="9" font-weight="800">Na</text>
+                      </g>
+                      <text x="90" y="205" text-anchor="middle" fill="#FBCFE8" font-size="10.5" font-weight="700">Cùng C<tspan dy="2" font-size="7.5">2</tspan><tspan dy="-2">H</tspan><tspan dy="2" font-size="7.5">6</tspan><tspan dy="-2">O nhưng không có &ndash;OH</tspan></text>
+                    </svg>
+                  </div>
+
+                  <div id="status-tube-3" class="vlab-status-pill">Trạng thái: Sẵn sàng thử nghiệm</div>
+                  <button type="button" class="btn btn-blue vlab-drop-single-btn" data-tube="3" style="width:100%; padding:8px 12px; font-size:0.86rem;">
+                    <span>🧪 Thả Na vào Dimethyl ether (CH<sub>3</sub>&ndash;O&ndash;CH<sub>3</sub>)</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- THANH CÔNG CỤ ĐIỀU KHIỂN THÍ NGHIỆM ẢO -->
+              <div class="vlab-controls-bar">
+                <button type="button" id="btn-sim-na-alcohol" class="btn btn-primary">
+                  <span>🧪 Thả Na vào Ethylic alcohol (CH<sub>3</sub>&ndash;CH<sub>2</sub>&ndash;OH)</span>
+                </button>
+                <button type="button" id="btn-sim-na-ether" class="btn btn-blue">
+                  <span>🧪 Thả Na vào Dimethyl ether (CH<sub>3</sub>&ndash;O&ndash;CH<sub>3</sub>)</span>
+                </button>
+                <button type="button" id="btn-sim-na-all" class="btn btn-yellow">
+                  <span>⚡ Thả Na đồng loạt vào cả 3 ống</span>
+                </button>
+                <button type="button" id="btn-sim-flame-h2" class="btn btn-outline" style="background:#FFF; color:#831843;">
+                  <span>🔥 Đưa que đóm thử khí H<sub>2</sub> (Ống 2)</span>
+                </button>
+                <button type="button" id="btn-sim-reset" class="btn btn-danger">
+                  <span>🔄 Làm mới ống nghiệm</span>
+                </button>
+              </div>
+
+              <!-- KÍNH HIỂN VI PHÂN TỬ & GIẢI THÍCH HIỆN TƯỢNG -->
+              <div id="vlab-microscope-panel" class="vlab-microscope-box">
+                <strong>🔎 Góc nhìn Kính hiển vi Phân tử:</strong> Hãy bấm các nút thả <strong>Natri (Na)</strong> hoặc chuyển sang <strong>Thí nghiệm 2 (Độ tan trong nước)</strong> ở trên để quan sát sự khác biệt giữa 3 chất trong Bảng 22.1 SGK!
+              </div>
+            </div>
+
+            <div id="na-lab-feedback" class="feedback-box" role="status"></div>
+          </div>
+        </div>
+
+        <!-- MODULE IV: PHÂN LOẠI HỢP CHẤT HỮU CƠ -->
+        <div id="mod-4" class="knowledge-module-panel hidden">
+          <div class="mindmap-box">
+            <span class="lesson-badge">Mục IV • Sơ đồ Tư duy Phân loại Hợp chất hữu cơ (Trang 104 SGK)</span>
+            <h3 style="color: var(--primary-plum); margin-top: 8px; font-size: 1.3rem;">
+              🗺️ Phân loại Hợp chất hữu cơ dựa trên thành phần nguyên tố
+            </h3>
+            <p style="color: var(--text-secondary); margin-bottom: 14px;">
+              Dựa trên thành phần nguyên tố tạo nên phân tử, hợp chất hữu cơ được chia làm <strong>2 loại lớn</strong>:
+            </p>
+
+            <div class="knowledge-card-grid">
+              <!-- Nhóm 1: Hydrocarbon -->
+              <div class="k-card" style="border-color: var(--primary-blue); background: #F0F9FF;">
+                <h3>🔵 1. HYDROCARBON (Hiđrocacbon)</h3>
+                <p style="margin-bottom: 10px;">
+                  Là loại hợp chất hữu cơ mà thành phần phân tử <strong>chỉ chứa 2 nguyên tố Carbon (C) và Hydrogen (H)</strong>.
+                </p>
+                <div style="background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1.5px solid #BAE6FD;">
+                  <strong>📌 Công thức chung nhận diện:</strong> C<sub>x</sub>H<sub>y</sub><br />
+                  <strong>Ví dụ tiêu biểu trong SGK:</strong>
+                  <ul style="padding-left: 18px; margin-top: 6px;">
+                    <li><strong>CH<sub>4</sub></strong> (Methane - khí bùn ao, khí biogas)</li>
+                    <li><strong>CH<sub>2</sub>=CH<sub>2</sub></strong> (C<sub>2</sub>H<sub>4</sub> - Ethylene)</li>
+                    <li><strong>CH<sub>3</sub>CH<sub>2</sub>CH<sub>3</sub></strong> (C<sub>3</sub>H<sub>8</sub> - Propane)</li>
+                    <li><strong>CH<sub>3</sub>CH=CH<sub>2</sub></strong> (C<sub>3</sub>H<sub>6</sub> - Propylene), <strong>C<sub>4</sub>H<sub>10</sub></strong> (Butane), <strong>C<sub>6</sub>H<sub>6</sub></strong> (Benzene).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Nhóm 2: Dẫn xuất của hydrocarbon -->
+              <div class="k-card plum-border" style="background: #FDF2F8;">
+                <h3>🟣 2. DẪN XUẤT CỦA HYDROCARBON</h3>
+                <p style="margin-bottom: 10px;">
+                  Là loại hợp chất hữu cơ mà trong thành phần phân tử, <strong>ngoài nguyên tố Carbon (C) còn có nguyên tố khác như Oxygen (O), Nitrogen (N), Chlorine (Cl),...</strong> và thường có Hydrogen (H).
+                </p>
+                <div style="background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1.5px solid #F472B6;">
+                  <strong>📌 Dấu hiệu nhận diện nhanh:</strong> Có chứa thêm O, N, Cl, Br, S,... bên cạnh C.<br />
+                  <strong>Ví dụ tiêu biểu trong SGK:</strong>
+                  <ul style="padding-left: 18px; margin-top: 6px;">
+                    <li>Chứa Cl: <strong>CH<sub>3</sub>Cl</strong> (Methyl chloride)</li>
+                    <li>Chứa O: <strong>CH<sub>3</sub>CH<sub>2</sub>OH</strong> (Ethylic alcohol), <strong>CH<sub>3</sub>COOH</strong> (Acetic acid), <strong>CH<sub>3</sub>COOCH<sub>2</sub>CH<sub>3</sub></strong> (Ethyl acetate), <strong>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></strong> (Glucose)</li>
+                    <li>Chứa N: <strong>CH<sub>3</sub>NH<sub>2</sub></strong> (Methylamine), <strong>CO(NH<sub>2</sub>)<sub>2</sub></strong> (Urea).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 3: LUYỆN TẬP TƯƠNG TÁC (3 HOẠT ĐỘNG BẮT BUỘC KÈM PHẢN HỒI TỨC THÌ)
+           ==================================================================== -->
+      <section id="sec-practice" class="lesson-section">
+        <div class="section-header">
+          <div>
+            <span class="section-step-tag">Section 3 • Luyện tập tương tác (Practice Activities)</span>
+            <h2 class="section-title">🎮 Phòng Thực Hành Tương Tác (3 Nhiệm Vụ SGK)</h2>
+            <p class="section-subtitle">
+              Thực hiện 3 hoạt động tương tác kéo thả, ghép cặp và phân loại dưới đây. Hệ thống sẽ phản hồi ngay lập tức!
+            </p>
+          </div>
+        </div>
+
+        <!-- HOẠT ĐỘNG 1: PHÂN LOẠI CHẤT HỮU CƠ / VÔ CƠ (KÉO THẢ & CLICK CHỌN - TRANG 103 SGK) -->
+        <div class="activity-card">
+          <span class="lesson-badge">Hoạt động 1 • Câu hỏi SGK Trang 103 (Kéo thả hoặc Click chọn)</span>
+          <h3 style="margin-top: 6px;">
+            🧪 Nhiệm vụ 1: Sắp xếp 11 hợp chất vào 2 nhóm: Hợp chất hữu cơ và Hợp chất vô cơ
+          </h3>
+          <p style="font-size: 0.94rem; color: var(--text-secondary);">
+            Em có thể <strong>kéo thả thẻ chất</strong> vào 2 giỏ bên dưới hoặc <strong>bấm nút chọn trực tiếp</strong> trên từng thẻ chất để nhận phản hồi tức thì!
+          </p>
+
+          <!-- Khay kéo thả nhanh -->
+          <div class="chip-pool" id="act1-chip-pool" aria-label="Danh sách 11 hợp chất cần phân loại"></div>
+
+          <div class="DropZones-grid">
+            <div class="drop-bucket" id="bucket-organic" data-bucket="organic">
+              <div class="bucket-header" style="color: var(--primary-plum);">
+                <span>🌿 NHÓM 1: HỢP CHẤT HỮU CƠ</span>
+                <span id="count-organic" class="lesson-badge">0 / 5</span>
+              </div>
+              <div class="bucket-items" id="items-organic"></div>
+            </div>
+
+            <div class="drop-bucket blue-bucket" id="bucket-inorganic" data-bucket="inorganic">
+              <div class="bucket-header" style="color: var(--primary-blue-deep);">
+                <span>🪨 NHÓM 2: HỢP CHẤT VÔ CƠ</span>
+                <span id="count-inorganic" class="lesson-badge">0 / 6</span>
+              </div>
+              <div class="bucket-items" id="items-inorganic"></div>
+            </div>
+          </div>
+
+          <!-- Bảng nút bấm trực tiếp hỗ trợ cả Mobile & Desktop -->
+          <div class="sort-items-grid" id="act1-cards-grid"></div>
+          <div id="act1-instant-feedback" class="feedback-box" role="status"></div>
+        </div>
+
+        <!-- HOẠT ĐỘNG 2: GHÉP CẶP CÔNG THỨC PHÂN TỬ VỚI CÔNG THỨC CẤU TẠO TƯƠNG ỨNG -->
+        <div class="activity-card">
+          <span class="lesson-badge">Hoạt động 2 • Ghép cặp CTPT &amp; CTCT (Hình 22.2 &amp; 22.3 SGK)</span>
+          <h3 style="margin-top: 6px;">
+            🔗 Nhiệm vụ 2: Ghép cặp Công thức phân tử với Công thức cấu tạo tương ứng
+          </h3>
+          <p style="font-size: 0.94rem; color: var(--text-secondary); margin-bottom: 12px;">
+            Hãy chọn Công thức cấu tạo thu gọn (và đặc điểm cấu tạo) tương ứng với mỗi chất ở cột bên trái. Hệ thống sẽ báo kết quả ngay khi em chọn!
+          </p>
+
+          <div id="act2-matching-container"></div>
+          <div id="act2-instant-feedback" class="feedback-box" role="status"></div>
+        </div>
+
+        <!-- HOẠT ĐỘNG 3: PHÂN LOẠI HYDROCARBON VÀ DẪN XUẤT (9 CHẤT TRANG 104 SGK) -->
+        <div class="activity-card">
+          <span class="lesson-badge">Hoạt động 3 • Câu hỏi SGK Trang 104</span>
+          <h3 style="margin-top: 6px;">
+            ⚗️ Nhiệm vụ 3: Sắp xếp 9 chất hữu cơ vào 2 nhóm: Hydrocarbon và Dẫn xuất của hydrocarbon
+          </h3>
+          <p style="font-size: 0.94rem; color: var(--text-secondary);">
+            Hãy phân loại 9 chất trong SGK (<strong>CH<sub>4</sub>, CH<sub>3</sub>Cl, CH<sub>2</sub>=CH<sub>2</sub>, CH<sub>3</sub>CH<sub>2</sub>OH, CH<sub>3</sub>COOH, CH<sub>3</sub>NH<sub>2</sub>, CH<sub>3</sub>CH<sub>2</sub>CH<sub>3</sub>, CH<sub>3</sub>CH=CH<sub>2</sub>, CH<sub>3</sub>COOCH<sub>2</sub>CH<sub>3</sub></strong>) vào đúng nhóm!
+          </p>
+
+          <div class="sort-items-grid" id="act3-cards-grid"></div>
+          <div id="act3-instant-feedback" class="feedback-box" role="status"></div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 4: THỬ THÁCH CUỐI CÙNG (GAME CHALLENGE - TỔNG 100 ĐIỂM)
+           40 Câu Trắc nghiệm × 2đ = 80đ | 4 Câu Tự luận × 5đ = 20đ
+           ==================================================================== -->
+      <section id="sec-challenge" class="lesson-section">
+        <div class="section-header">
+          <div>
+            <span class="section-step-tag">Section 4 • Thử thách cuối cùng (Game Challenge - 100 Điểm)</span>
+            <h2 class="section-title">🏆 Đấu Trường Hóa Hữu Cơ – Chinh Phục 100 Điểm</h2>
+            <p class="section-subtitle">
+              Cấu trúc chuẩn: <strong>Trắc nghiệm 80 điểm</strong> (10 câu Nhiều lựa chọn + 10 câu Đúng/Sai + 10 câu Trả lời ngắn + 10 câu Ghép cột, mỗi câu 2 điểm) &amp; <strong>Tự luận 20 điểm</strong> (4 câu × 5 điểm/câu). Tự động chấm điểm và gửi về Google Sheets!
+            </p>
+          </div>
+        </div>
+
+        <div class="exam-overview-banner">
+          <div>
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.9;">
+              Thí sinh đang thực hiện thử thách Bài 22
+            </div>
+            <div style="font-size: 1.3rem; font-weight: 900;">
+              👨‍🎓 <span id="exam-student-name">Học sinh</span> — Lớp <span id="exam-student-class">9A</span>
+            </div>
+            <div style="font-size: 0.92rem; margin-top: 4px;">
+              Tiến độ làm bài: <strong id="answered-count-text">0 / 44</strong> câu hỏi (Thang điểm: <strong>100 điểm</strong>)
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" id="scroll-to-submit-btn" class="btn btn-yellow">
+              📝 Nộp bài &amp; Tính điểm tự động
+            </button>
+          </div>
+        </div>
+
+        <!-- Thanh chuyển đổi 5 Phần thi -->
+        <div class="exam-parts-nav" role="tablist">
+          <button type="button" class="exam-part-tab active" data-part="part-mcq">
+            Phần I: Nhiều lựa chọn<br /><small>(10 câu × 2đ = 20đ)</small>
+          </button>
+          <button type="button" class="exam-part-tab" data-part="part-tf">
+            Phần II: Đúng / Sai<br /><small>(10 câu × 2đ = 20đ)</small>
+          </button>
+          <button type="button" class="exam-part-tab" data-part="part-short">
+            Phần III: Trả lời ngắn<br /><small>(10 câu × 2đ = 20đ)</small>
+          </button>
+          <button type="button" class="exam-part-tab" data-part="part-match">
+            Phần IV: Ghép cột<br /><small>(10 câu × 2đ = 20đ)</small>
+          </button>
+          <button type="button" class="exam-part-tab" data-part="part-essay">
+            Phần V: Tự luận<br /><small>(4 câu × 5đ = 20đ)</small>
+          </button>
+          <button type="button" class="exam-part-tab" data-part="part-all">
+            📋 Xem tất cả 44 câu
+          </button>
+        </div>
+
+        <!-- PHẦN I: TRẮC NGHIỆM NHIỀU LỰA CHỌN (10 CÂU × 2Đ = 20Đ) -->
+        <div id="part-mcq" class="exam-part-panel">
+          <h3 style="color: var(--primary-plum); margin-bottom: 14px; font-size: 1.28rem;">
+            PHẦN I. TRẮC NGHIỆM NHIỀU LỰA CHỌN (10 câu × 2 điểm = 20 điểm)
+          </h3>
+          <div id="mcq-questions-list"></div>
+        </div>
+
+        <!-- PHẦN II: TRẮC NGHIỆM ĐÚNG / SAI (10 CÂU × 2Đ = 20Đ) -->
+        <div id="part-tf" class="exam-part-panel hidden">
+          <h3 style="color: var(--primary-plum); margin-bottom: 14px; font-size: 1.28rem;">
+            PHẦN II. TRẮC NGHIỆM ĐÚNG / SAI (10 câu × 2 điểm = 20 điểm)
+          </h3>
+          <div id="tf-questions-list"></div>
+        </div>
+
+        <!-- PHẦN III: TRẮC NGHIỆM TRẢ LỜI NGẮN (10 CÂU × 2Đ = 20Đ) -->
+        <div id="part-short" class="exam-part-panel hidden">
+          <h3 style="color: var(--primary-plum); margin-bottom: 14px; font-size: 1.28rem;">
+            PHẦN III. TRẮC NGHIỆM TRẢ LỜI NGẮN (10 câu × 2 điểm = 20 điểm)
+          </h3>
+          <p style="color: var(--text-secondary); margin-bottom: 14px;">
+            Điền con số, kí hiệu hoặc từ khóa hóa học ngắn gọn vào ô trống:
+          </p>
+          <div id="short-questions-list"></div>
+        </div>
+
+        <!-- PHẦN IV: TRẮC NGHIỆM GHÉP CỘT (10 CÂU × 2Đ = 20Đ) -->
+        <div id="part-match" class="exam-part-panel hidden">
+          <h3 style="color: var(--primary-plum); margin-bottom: 14px; font-size: 1.28rem;">
+            PHẦN IV. TRẮC NGHIỆM GHÉP CỘT (10 câu × 2 điểm = 20 điểm)
+          </h3>
+          <p style="color: var(--text-secondary); margin-bottom: 14px;">
+            Hãy ghép mỗi chất hoặc khái niệm ở <strong>Cột A</strong> với mô tả chính xác nhất ở <strong>Cột B</strong>:
+          </p>
+          <div id="match-questions-list"></div>
+        </div>
+
+        <!-- PHẦN V: TỰ LUẬN (4 CÂU × 5Đ = 20Đ) -->
+        <div id="part-essay" class="exam-part-panel hidden">
+          <h3 style="color: var(--primary-plum); margin-bottom: 14px; font-size: 1.28rem;">
+            PHẦN V. TỰ LUẬN VẬN DỤNG (4 câu × 5 điểm = 20 điểm)
+          </h3>
+          <p style="color: var(--text-secondary); margin-bottom: 14px;">
+            Trình bày câu trả lời vào ô bên dưới. Hệ thống chấm điểm tự động theo 5 tiêu chí khoa học chuẩn SGK (mỗi tiêu chí 1 điểm) và đồng bộ bài làm về Google Sheets của Giáo viên!
+          </p>
+          <div id="essay-questions-list"></div>
+        </div>
+
+        <!-- KHU VỰC NÚT BẤM NỘP BÀI & TÍNH ĐIỂM TỰ ĐỘNG -->
+        <div id="submit-exam-zone" style="margin-top: 28px; padding-top: 24px; border-top: 2px dashed #CBD5E1; text-align: center;">
+          <button type="button" id="submit-exam-btn" class="btn btn-yellow" style="font-size: 1.18rem; padding: 16px 36px;">
+            🚀 NỘP BÀI &amp; TÍNH ĐIỂM TỰ ĐỘNG (THANG ĐIỂM 100)
+          </button>
+          <button type="button" id="retry-exam-btn" class="btn btn-outline hidden" style="font-size: 1.02rem; padding: 14px 24px; margin-left: 12px;">
+            🔄 Làm lại Thử thách
+          </button>
+          <p id="gas-sync-status" style="margin-top: 12px; font-weight: 700; color: var(--primary-plum);"></p>
+        </div>
+
+        <!-- BẢNG KẾT QUẢ CUỐI CÙNG SAU KHI NỘP BÀI -->
+        <div id="exam-result-panel" class="score-result-panel hidden" aria-live="polite">
+          <span class="lesson-badge">KẾT QUẢ GAME CHALLENGE BÀI 22</span>
+          <h3 id="result-badge-title" style="font-size: 1.65rem; color: var(--primary-plum); margin: 10px 0;">
+            🏆 BẬC THẦY HÓA HỌC HỮU CƠ!
+          </h3>
+          <p id="result-student-info" style="font-weight: 700; color: var(--text-secondary); margin-bottom: 14px;"></p>
+
+          <div class="score-circle">
+            <div id="result-total-score" class="score-number">100</div>
+            <div style="font-size: 0.9rem; font-weight: 800; color: var(--text-muted);">/ 100 ĐIỂM</div>
+          </div>
+
+          <div id="result-correct-summary" style="font-weight: 800; color: var(--primary-blue-deep); margin-bottom: 14px; font-size: 1.05rem;"></div>
+
+          <div class="score-breakdown-grid">
+            <div class="breakdown-box">
+              <div style="font-size: 0.84rem; color: var(--text-muted); font-weight: 700;">Phần I: Nhiều lựa chọn (10 câu)</div>
+              <div id="score-part1" style="font-size: 1.35rem; font-weight: 900; color: var(--primary-plum);">0 / 20</div>
+            </div>
+            <div class="breakdown-box">
+              <div style="font-size: 0.84rem; color: var(--text-muted); font-weight: 700;">Phần II: Đúng / Sai (10 câu)</div>
+              <div id="score-part2" style="font-size: 1.35rem; font-weight: 900; color: var(--primary-plum);">0 / 20</div>
+            </div>
+            <div class="breakdown-box">
+              <div style="font-size: 0.84rem; color: var(--text-muted); font-weight: 700;">Phần III: Trả lời ngắn (10 câu)</div>
+              <div id="score-part3" style="font-size: 1.35rem; font-weight: 900; color: var(--primary-plum);">0 / 20</div>
+            </div>
+            <div class="breakdown-box">
+              <div style="font-size: 0.84rem; color: var(--text-muted); font-weight: 700;">Phần IV: Ghép cột (10 câu)</div>
+              <div id="score-part4" style="font-size: 1.35rem; font-weight: 900; color: var(--primary-plum);">0 / 20</div>
+            </div>
+            <div class="breakdown-box">
+              <div style="font-size: 0.84rem; color: var(--text-muted); font-weight: 700;">Phần V: Tự luận (4 câu × 5đ)</div>
+              <div id="score-part5" style="font-size: 1.35rem; font-weight: 900; color: var(--primary-plum);">0 / 20</div>
+            </div>
+          </div>
+
+          <p id="result-encouragement" style="font-size: 1.05rem; font-weight: 700; color: #065F46; margin-top: 10px;"></p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 5: TỔNG KẾT & TÀI LIỆU (SUMMARY - TRANG 104 SGK)
+           ==================================================================== -->
+      <footer id="sec-summary" class="lesson-section" style="background: linear-gradient(135deg, #FDF2F8 0%, #F0F9FF 50%, #FFFBEB 100%); border-color: var(--primary-plum-bright);">
+        <div class="section-header">
+          <div>
+            <span class="section-step-tag">Section 5 • Tổng kết &amp; Tài liệu (Trang 104 SGK)</span>
+            <h2 class="section-title">📌 Tổng kết Bài 22: Em đã học &amp; Em có thể</h2>
+          </div>
+        </div>
+
+        <div class="warmup-grid">
+          <div style="background: #FFFFFF; padding: 22px; border-radius: 16px; border: 2px solid var(--primary-blue);">
+            <h3 style="color: var(--primary-blue-deep); margin-bottom: 12px;">📘 EM ĐÃ HỌC (Kiến thức cốt lõi SGK)</h3>
+            <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+              <li>
+                <strong>Hợp chất của carbon</strong> là hợp chất hữu cơ (trừ <strong>CO, CO<sub>2</sub>, muối carbonate,...</strong>). Hợp chất hữu cơ được chia thành hai loại: <strong>hydrocarbon</strong> và <strong>dẫn xuất của hydrocarbon</strong>.
+              </li>
+              <li>
+                Trong phân tử hợp chất hữu cơ, <strong>carbon luôn có hóa trị IV</strong>, các nguyên tử carbon có thể liên kết trực tiếp với nhau tạo thành <strong>mạch carbon</strong> (mạch hở không phân nhánh, mạch hở phân nhánh, mạch vòng).
+              </li>
+              <li>
+                <strong>Công thức phân tử</strong> cho biết thành phần nguyên tố và số lượng nguyên tử của mỗi nguyên tố trong phân tử.
+              </li>
+              <li>
+                <strong>Công thức cấu tạo</strong> cho biết trật tự liên kết và cách thức liên kết giữa các nguyên tử trong phân tử.
+              </li>
+            </ul>
+          </div>
+
+          <div style="background: #FFFFFF; padding: 22px; border-radius: 16px; border: 2px solid var(--primary-plum-bright);">
+            <h3 style="color: var(--primary-plum); margin-bottom: 12px;">💡 EM CÓ THỂ &amp; BẢNG TỪ KHÓA QUAN TRỌNG</h3>
+            <div style="background: #FDF2F8; padding: 14px; border-radius: 12px; margin-bottom: 14px; border-left: 4px solid var(--primary-plum);">
+              <strong>🎯 EM CÓ THỂ:</strong> Phân biệt được hợp chất hữu cơ và hợp chất vô cơ trong đời sống hàng ngày (như khí gas Butane C<sub>4</sub>H<sub>10</sub>, cồn Ethylic alcohol C<sub>2</sub>H<sub>5</sub>OH, giấm ăn CH<sub>3</sub>COOH, phân đạm Urea CO(NH<sub>2</sub>)<sub>2</sub> so với nước H<sub>2</sub>O, muối ăn NaCl, đá vôi CaCO<sub>3</sub>, khí CO<sub>2</sub>).
+            </div>
+
+            <div class="table-responsive">
+              <table class="comparison-table" style="margin-top: 8px; font-size: 0.9rem;">
+                <thead>
+                  <tr>
+                    <th>Từ khóa</th>
+                    <th>Ghi nhớ nhanh trong 5 giây</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Hợp chất hữu cơ</td>
+                    <td>Nhất thiết có <strong>C</strong> (trừ CO, CO<sub>2</sub>, H<sub>2</sub>CO<sub>3</sub>, muối carbonate,...)</td>
+                  </tr>
+                  <tr>
+                    <td>Hóa trị trong HCHC</td>
+                    <td><strong>C (IV)</strong>, H (I), O (II), Cl (I) — Liên kết cộng hóa trị</td>
+                  </tr>
+                  <tr>
+                    <td>Hydrocarbon</td>
+                    <td>Chỉ chứa <strong>C và H</strong> (CH<sub>4</sub>, C<sub>2</sub>H<sub>4</sub>, C<sub>3</sub>H<sub>8</sub>, C<sub>4</sub>H<sub>10</sub>, C<sub>6</sub>H<sub>6</sub>)</td>
+                  </tr>
+                  <tr>
+                    <td>Dẫn xuất HC</td>
+                    <td>Ngoài C (và H) còn có <strong>O, N, Cl,...</strong> (C<sub>2</sub>H<sub>5</sub>OH, CH<sub>3</sub>Cl, CH<sub>3</sub>COOH)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="margin-top: 18px; text-align: center;">
+              <button type="button" id="complete-lesson-btn" class="btn btn-primary btn-block">
+                🎉 HOÀN THÀNH 100% BÀI HỌC BÀI 22
+              </button>
+              <div id="lesson-complete-banner" class="feedback-box correct" style="margin-top: 12px;">
+                🌟 Chúc mừng bạn đã hoàn thành xuất sắc Bài 22: Giới thiệu về hợp chất hữu cơ!
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL CẤU HÌNH GOOGLE APPS SCRIPT (LƯU ĐIỂM GOOGLE SHEETS)
+       ======================================================================== -->
+  <div id="gas-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="gas-modal-title">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 id="gas-modal-title" style="color: var(--primary-plum); font-size: 1.25rem;">
+          ⚙️ Cấu hình Kết nối Google Apps Script (Google Sheets)
+        </h3>
+        <button type="button" id="close-gas-modal-btn" class="btn btn-outline" style="padding: 6px 12px;">✖ Đóng</button>
+      </div>
+
+      <p style="font-size: 0.94rem; color: var(--text-secondary); margin-bottom: 14px;">
+        Khi học sinh nhấn <strong>"Nộp bài &amp; Tính điểm tự động"</strong>, hệ thống sẽ gửi Họ và tên, Lớp, Tổng điểm (/100), Điểm từng phần (Nhiều lựa chọn, Đúng/Sai, Trả lời ngắn, Ghép cột, Tự luận) và nội dung 4 câu Tự luận về Google Sheets qua Web App URL dưới đây:
+      </p>
+
+      <div class="form-group">
+        <label for="gas-url-input" class="form-label">Đường dẫn Google Apps Script Web App URL:</label>
+        <input
+          type="url"
+          id="gas-url-input"
+          class="form-input"
+          placeholder="https://script.google.com/macros/s/.../exec"
+        />
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
+        <button type="button" id="save-gas-url-btn" class="btn btn-primary">💾 Lưu URL kết nối</button>
+        <button type="button" id="copy-gas-code-btn" class="btn btn-yellow">📋 Sao chép mã Code.gs</button>
+      </div>
+
+      <div id="gas-save-feedback" class="feedback-box" style="margin-bottom: 14px;"></div>
+
+      <div style="background: #F8FAFC; padding: 14px; border-radius: 12px; border: 1.5px solid #CBD5E1; font-size: 0.9rem;">
+        <strong>📌 Hướng dẫn tạo Google Sheet nhận điểm tự động (File mẫu: <code>google-apps-script/Code.gs</code>):</strong>
+        <ol style="padding-left: 20px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
+          <li>Mở một bảng tính Google Sheets mới, chọn menu <strong>Tiện ích mở rộng (Extensions) &rarr; Apps Script</strong>.</li>
+          <li>Nhấn nút <strong>"📋 Sao chép mã Code.gs"</strong> ở trên rồi dán vào cửa sổ Apps Script và nhấn Lưu.</li>
+          <li>Nhấn <strong>Triển khai (Deploy) &rarr; Tùy chọn triển khai mới (New deployment) &rarr; Ứng dụng web (Web app)</strong>.</li>
+          <li>Chọn quyền truy cập: <strong>Bất kỳ ai (Anyone)</strong> &rarr; Nhấn Triển khai &rarr; Sao chép URL có đuôi <code>/exec</code> dán vào ô trên.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
